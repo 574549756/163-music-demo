@@ -6,36 +6,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>管理页面</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-        }
-
-        #yyy {
-            padding: 50px 80px;
-            border: 2px dashed #dddddd;
-            border-radius: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: 200px;
-        }
-
-        #yyy :hover {
-            cursor: pointer;
-        }
-    </style>
+    <link rel="stylesheet" href="./css/default.css">
 </head>
 
 <body>
-    <div id="yyy">
-        <span id="xxx">点击或拖曳上传</span>
-        <p>文件大小不能超过 20MB</p>
+    <div class="page">
+        <aside>
+            <div class="newMusic">
+                新建歌曲
+            </div>
+            <ul class="musicList">
+                <li>歌曲1</li>
+                <li>歌曲2</li>
+                <li class="active">歌曲3</li>
+                <li>歌曲4</li>
+                <li>歌曲5</li>
+                <li>歌曲6</li>
+                <li>歌曲7</li>
+                <li>歌曲8</li>
+                <li>歌曲9</li>
+                <li>歌曲10</li>
+            </ul>
+            <div class="uploadArea">
+                <div id="uploadContainer" class="draggable">
+                    <div id="uploadButton" class="clickable">
+                        <span>点击或拖曳上传</span>
+                        <p>文件大小不能超过 20MB</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        <main>
+            <form class=form>
+                <div class="row">
+                    <label for="">
+                        歌名
+                        <input type="text">
+                    </label>
+                </div>
+                <div class="row">
+                    <label for="">
+                        歌手
+                        <input type="text">
+                    </label>
+                </div>
+                <div class="row">
+                    <label for="">
+                        外链
+                        <input type="text">
+                    </label>
+                </div>
+                <div class="row">
+                    <button type="submit">保存</button>
+                </div>
+            </form>
+        </main>
     </div>
-    <div id="uploadStatus"></div>
-    <audio controls src="http://pbr03em7c.bkt.clouddn.com/%E3%83%8A%E3%83%8E%20-%20SABLE.mp3"></audio>
     <script src="./../node_modules/leancloud-storage/dist/av-min.js"></script>
     <script>
         var APP_ID = 'p8DAt4cTrhT9vMOMmiI0mVKM-gzGzoHsz';
@@ -55,7 +81,7 @@
         //引入Plupload 、qiniu.js后
         var uploader = Qiniu.uploader({
             runtimes: 'html5,html4',    //上传模式,依次退化
-            browse_button: 'xxx',       //上传选择的点选按钮，**必需**
+            browse_button: 'uploadButton',       //上传选择的点选按钮，**必需**
             uptoken_url: 'http://localhost:8888/uptokens',            //Ajax请求upToken的Url，**强烈建议设置**（服务端提供）
             // uptoken: '', //若未指定uptoken_url,则必须指定 uptoken ,uptoken由其他程序生成
             // unique_names: true, // 默认 false，key为文件名。若开启该选项，SDK为自动生成上传成功后的key（文件名）。
@@ -63,10 +89,10 @@
             domain: 'pbr03em7c.bkt.clouddn.com',   //bucket 域名，下载资源时用到，**必需**
             // pbr03em7c.bkt.clouddn.com
             get_new_uptoken: false,  //设置上传文件的时候是否每次都重新获取新的token
-            container: 'yyy',           //上传区域DOM ID，默认是browser_button的父元素，
+            container: 'uploadContainer',           //上传区域DOM ID，默认是browser_button的父元素，
             max_file_size: '20mb',           //最大文件体积限制
             dragdrop: true,                   //开启可拖曳上传
-            drop_element: 'yyy',        //拖曳上传区域元素的ID，拖曳文件或文件夹后可触发上传
+            drop_element: 'uploadContainer',        //拖曳上传区域元素的ID，拖曳文件或文件夹后可触发上传
             auto_start: true,                 //选择文件后自动上传，若关闭需要自己绑定事件触发上传
             init: {
                 'FilesAdded': function (up, files) {
