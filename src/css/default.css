@@ -114,11 +114,12 @@ input {
 .form input[type='button'],
 .form input[type='submit'],
 .form button {
+    cursor: pointer;
     height: 30px;
     padding-left: 10px;
     padding-right: 10px;
     border-radius: 5px;
-    background: none;
+    background: white;
     border: 1px solid #ddd;
 }
 .page > main {

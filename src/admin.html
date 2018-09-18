@@ -37,33 +37,6 @@
             </div>
         </aside>
         <main>
-            <h1>新建歌曲</h1>
-            <form class=form>
-                <div class="row">
-                    <label for="">
-                        歌名
-                    </label>
-
-                    <input type="text">
-                </div>
-                <div class="row">
-                    <label for="">
-                        歌手
-                    </label>
-
-                    <input type="text">
-                </div>
-                <div class="row">
-                    <label for="">
-                        外链
-                    </label>
-
-                    <input type="text">
-                </div>
-                <div class="row actions">
-                    <button type="submit">保存</button>
-                </div>
-            </form>
         </main>
     </div>
     <script src="./../node_modules/leancloud-storage/dist/av-min.js"></script>
@@ -78,6 +51,7 @@
 
 
     </script>
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
     <script src="../vendors/moxie.js"></script>
     <script src="../node_modules/plupload/js/plupload.min.js"></script>
     <script src="../node_modules/qiniu-js/dist/qiniu.min.js"></script>
@@ -141,6 +115,7 @@
 
                         // uploader 为一个plupload对象，继承了所有plupload的方法，参考http://plupload.com/docs
     </script>
+    <script src="./js/music-form.js"></script>
 </body>
 
 </html>
