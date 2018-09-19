@@ -85,10 +85,12 @@
             this.view = view
             this.view.init()
             this.model = model
-            this.bindEvents()
             this.view.render(this.model.data)
+            this.bindEvents()
             window.eventHub.on('upload', data => {
-                this.reset(data)
+                this.model.data = data
+                console.log(data)
+                this.view.render(this.model.data)
             })
         },
         reset(data) {

@@ -57,13 +57,9 @@
                             domain +
                             '/' +
                             encodeURIComponent(response.key)
-                        console.log({
-                            link: sourceLink,
-                            key: response.key
-                        })
                         window.eventHub.emit('upload', {
-                            link: sourceLink,
-                            key: response.key
+                            url: sourceLink,
+                            name: response.key
                         })
                     },
                     Error: function(up, err, errTip) {
