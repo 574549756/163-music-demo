@@ -41,6 +41,9 @@
             })
 
             $(this.el).html(html)
+        },
+        reset() {
+            this.render({})
         }
     }
     let model = {
@@ -102,8 +105,10 @@
                         .val()
                 })
                 this.model.create(data).then(() => {
-                    console.log(this.model.data)
-                    this.view.render(this.model.data)
+                    this.view.reset()
+                    let stringCopy = JSON.stringify(this.model.data)
+                    let objectCopy = JSON.parse(stringCopy)
+                    window.eventHub.emit('create', objectCopy)
                 })
             })
         }
