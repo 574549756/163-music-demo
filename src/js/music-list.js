@@ -28,5 +28,4 @@
         }
     }
     controller.init(view, model)
-    window.app.musicList = controller
 }

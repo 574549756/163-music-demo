@@ -1,27 +1,21 @@
 window.eventHub = {
-    events: {
-        羊城晚报: [],
-        人民日报: []
-    },
+    events: {},
+    //发布
     emit(eventName, data) {
         for (let key in this.events) {
             if (key === eventName) {
                 let fnList = this.events[key]
-                fnList.map(() => {
+                fnList.map(fn => {
                     fn.call(undefined, data)
                 })
             }
         }
     },
+    //订阅
     on(eventName, fn) {
-        for (let key in this.events.length) {
-            if (key === eventName) {
-                if (this.events[key]) {
-                    this.events[key] = []
-                }
-                this.events[key].push(fn)
-            }
+        if (this.events[eventName] === undefined) {
+            this.events[eventName] = []
         }
-    },
-    off() {}
+        this.events[eventName].push(fn)
+    }
 }

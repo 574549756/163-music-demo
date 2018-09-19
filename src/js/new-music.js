@@ -12,11 +12,14 @@
             this.view = view
             this.model = model
             this.view.render(this.model.data)
+            window.eventHub.on('upload', data => {
+                console.log('newMusic 模块得到了 data')
+                console.log(data)
+            })
         },
         active() {
             $(this.view.el).addClass('active')
         }
     }
     controller.init(view, model)
-    window.app.newMusic = controller
 }
