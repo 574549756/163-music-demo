@@ -12,7 +12,11 @@
             this.view = view
             this.model = model
             this.view.render(this.model.data)
+        },
+        active() {
+            $(this.view.el).addClass('active')
         }
     }
     controller.init(view, model)
+    window.app.newMusic = controller
 }

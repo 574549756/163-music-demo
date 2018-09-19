@@ -40,7 +40,11 @@
             this.view = view
             this.model = model
             this.view.render(this.model.data)
+        },
+        reset(data) {
+            console.log('reset')
         }
     }
     controller.init(view, model)
+    window.app.musicForm = controller
 }
