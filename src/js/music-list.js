@@ -43,6 +43,10 @@
                 this.model.data.songs.push(songData)
                 this.view.render(this.model.data)
             })
+            var query = new AV.Query('')
+            query.find().then(x => {
+                console.log(x)
+            })
         }
     }
     controller.init(view, model)
