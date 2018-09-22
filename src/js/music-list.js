@@ -29,6 +29,15 @@
     let model = {
         data: {
             songs: []
+        },
+        find() {
+            var query = new AV.Query('Song')
+            return query.find().then(songs => {
+                this.data.songs = songs.map(song => {
+                    return { id: song.id, ...song.attributes }
+                })
+                return songs
+            })
         }
     }
     let controller = {
@@ -43,10 +52,13 @@
                 this.model.data.songs.push(songData)
                 this.view.render(this.model.data)
             })
-            var query = new AV.Query('')
-            query.find().then(x => {
-                console.log(x)
+            console.log('执行到这里了')
+            this.model.find().then(() => {
+                console.log('----------')
+                console.log(this.model.data)
+                this.view.render(this.model.data)
             })
+            console.log('那条执行完了')
         }
     }
     controller.init(view, model)
