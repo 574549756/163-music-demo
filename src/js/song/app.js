@@ -23,6 +23,7 @@
                 }
                 audio.ontimeupdate = () => {
                     this.showLyric(audio.currentTime)
+                    console.log(audio.currentTime)
                 }
             }
             if (status === 'playing') {
@@ -58,7 +59,6 @@
                 let nextTime = allP.eq(i + 1).attr('data-time')
                 if (currentTime <= time && time < nextTime) {
                     console.log(allP[i])
-                    console.log(time)
                     break
                 }
             }
