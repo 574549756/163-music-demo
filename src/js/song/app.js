@@ -23,7 +23,6 @@
                 }
                 audio.ontimeupdate = () => {
                     this.showLyric(audio.currentTime)
-                    console.log(audio.currentTime)
                 }
             }
             if (status === 'playing') {
@@ -35,7 +34,7 @@
             let { lyrics } = song
             let array = lyrics.split(`\\n`).map(string => {
                 let p = document.createElement('p')
-                var regex = /\[([\d:.]+)\].(.+)/
+                var regex = /\[([\d:.]+)\](.+)/
                 let matches = string.match(regex)
                 if (matches) {
                     p.textContent = matches[2]
@@ -47,21 +46,44 @@
                         parseInt(minute, 10) * 60 + parseFloat(seconds, 10)
                     p.setAttribute('data-time', newTime)
                 } else {
-                    p.textContent = ' '
+                    let parts = string.split(':')
+                    let minute = parts[0].replace('[', '')
+                    let seconds = parts[1].replace(']', '')
+                    let newTime =
+                        parseInt(minute, 10) * 60 + parseFloat(seconds, 10)
+                    p.setAttribute('data-time', newTime)
+                    p.innerHTML = '<br>'
                 }
                 this.$el.find('.lyric>.lines').append(p)
             })
         },
         showLyric(time) {
             let allP = this.$el.find('.lyric>.lines>p')
+            let p
             for (let i = 0; i < allP.length; i++) {
-                let currentTime = allP.eq(i).attr('data-time')
-                let nextTime = allP.eq(i + 1).attr('data-time')
-                if (currentTime <= time && time < nextTime) {
-                    console.log(allP[i])
-                    break
+                if (i === allP.length - 1) {
+                    p = allP[i]
+                } else {
+                    let currentTime = allP.eq(i).attr('data-time')
+                    let nextTime = allP.eq(i + 1).attr('data-time')
+                    if (currentTime <= time && time < nextTime) {
+                        p = allP[i]
+                        break
+                    }
                 }
             }
+            let pHeight = p.getBoundingClientRect().top
+            let linesHeight = this.$el
+                .find('.lyric>.lines')[0]
+                .getBoundingClientRect().top
+            let height = pHeight - linesHeight
+            $(p)
+                .addClass('active')
+                .siblings('.active')
+                .removeClass('active')
+            this.$el.find('.lyric>.lines').css({
+                transform: `translateY(${-height + 24}px)`
+            })
         },
         play() {
             this.$el.find('audio')[0].play()
