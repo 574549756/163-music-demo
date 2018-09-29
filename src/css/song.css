@@ -21,12 +21,29 @@
     display: flex;
     flex-direction: column;
     height: 100vh;
-    background: transparent
-        url(http://p3.music.126.net/z4p2xss2a50qNHe6TLFdoA==/2425522650910827.jpg)
-        no-repeat center;
     background-size: cover;
 }
-
+.backgroundWrapper {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: -10;
+    height: 100vh;
+    width: 100vw;
+}
+.backgroundCover {
+    position: absolute;
+    background-size: cover;
+    filter: blur(60px);
+    z-index: -20;
+    background-position: center center;
+}
+.backgroundCover::after {
+    display: block;
+    content: '';
+    box-shadow: none;
+    height: 100vh;
+    width: 100vw;
+}
 .disc-container {
     position: relative;
 }
@@ -36,18 +53,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid white;
-    height: 20vw;
-    width: 20vw;
+    height: 18vw;
+    width: 18vw;
     border-radius: 50%;
-    background: rgba(0, 0, 0, 0.5);
 }
 .disc-container .icon {
-    width: 10vw;
+    width: 18vw;
     fill: white;
 }
 .disc-container .pointer {
-    width: 24vw;
+    width: 26vw;
     position: absolute;
     left: 45vw;
 }
@@ -55,17 +70,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 18vw;
+    margin-top: 20vw;
 }
 .disc-container .ring {
-    width: 72vw;
+    width: 82vw;
 }
 .disc-container .light {
-    width: 72vw;
+    width: 82vw;
     position: absolute;
 }
 .disc-container .cover {
-    width: 44.5vw;
+    width: 51vw;
+    height: 51vw;
     position: absolute;
     border-radius: 50%;
     animation: circle 20s infinite linear;
@@ -81,8 +97,11 @@
 }
 .disc-container.playing .icon-pause {
     display: block;
+    width: 18vw;
+    height: 18vw;
 }
 .disc-container.playing .icon-play {
+    width: 18vw;
     display: none;
 }
 
@@ -119,18 +138,22 @@
     color: #d43b32;
 }
 .page > .links > a {
-    width: 38.5vw;
-    margin: 1em;
+    text-align: center;
+    width: 50vw;
+    height: 40px;
+    margin: 0.6em;
     text-align: center;
     border: 1px solid #d43b32;
     background: transparent;
     padding: 1.5vw;
     color: inherit;
     text-decoration: none;
-    border-radius: 1.3vw;
+    border-radius: 20px;
     letter-spacing: 1vw;
+    font-size: 16px;
 }
 .page > .links > a.main {
     background: #d43b32;
     color: white;
+    margin-left: 0;
 }
