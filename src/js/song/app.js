@@ -21,6 +21,9 @@
                     window.eventHub.emit('songEnd')
                     this.pause()
                 }
+                audio.ontimeupdate = () => {
+                    this.showLyric(audio.currentTime)
+                }
             }
             if (status === 'playing') {
                 this.$el.find('.disc-container').addClass('playing')
@@ -28,6 +31,37 @@
                 this.$el.find('.disc-container').removeClass('playing')
             }
             this.$el.find('.song-description>h1').text(song.name)
+            let { lyrics } = song
+            let array = lyrics.split(`\\n`).map(string => {
+                let p = document.createElement('p')
+                var regex = /\[([\d:.]+)\].(.+)/
+                let matches = string.match(regex)
+                if (matches) {
+                    p.textContent = matches[2]
+                    let time = matches[1]
+                    let parts = time.split(':')
+                    let minute = parts[0]
+                    let seconds = parts[1]
+                    let newTime =
+                        parseInt(minute, 10) * 60 + parseFloat(seconds, 10)
+                    p.setAttribute('data-time', newTime)
+                } else {
+                    p.textContent = ' '
+                }
+                this.$el.find('.lyric>.lines').append(p)
+            })
+        },
+        showLyric(time) {
+            let allP = this.$el.find('.lyric>.lines>p')
+            for (let i = 0; i < allP.length; i++) {
+                let currentTime = allP.eq(i).attr('data-time')
+                let nextTime = allP.eq(i + 1).attr('data-time')
+                if (currentTime <= time && time < nextTime) {
+                    console.log(allP[i])
+                    console.log(time)
+                    break
+                }
+            }
         },
         play() {
             this.$el.find('audio')[0].play()
@@ -43,7 +77,8 @@
                 name: '',
                 artist: '',
                 url: '',
-                cover: ''
+                cover: '',
+                lyrics: ''
             },
             status: 'paused'
         },
