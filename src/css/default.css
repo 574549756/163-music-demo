@@ -26,6 +26,12 @@ body {
 input {
     font-size: inherit;
 }
+textarea {
+    height: 200px;
+    width: 500px;
+    border-radius: 5px;
+    border: none;
+}
 
 /* layout */
 
@@ -133,7 +139,7 @@ input {
 .page > main > .form {
 }
 
-/* loading */ 
+/* loading */
 
 @keyframes loading {
     0% {
