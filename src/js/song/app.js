@@ -36,6 +36,7 @@
                 let p = document.createElement('p')
                 var regex = /\[([\d:.]+)\](.+)/
                 let matches = string.match(regex)
+
                 if (matches) {
                     p.textContent = matches[2]
                     let time = matches[1]
@@ -72,6 +73,7 @@
                     }
                 }
             }
+
             let pHeight = p.getBoundingClientRect().top
             let linesHeight = this.$el
                 .find('.lyric>.lines')[0]
