@@ -9,20 +9,27 @@
         },
         hide() {
             this.$el.removeClass('active')
-        },
-        displayResult(li) {
-            $('#searchResult').append(li)
-        },
-        noResult() {
-            $('#searchResult').html('没有结果')
         }
     }
     let model = {
-        search(name) {
+        data: [],
+        search: name => {
             var query = new AV.Query('Song')
             query.contains('name', name)
-            query.find().then(result => {
-                return result
+            query.find().then(function(results) {
+                $('#searchResult').empty()
+                if (results.length === 0) {
+                    $('#searchResult').html('没有结果')
+                } else {
+                    for (var i = 0; i < results.length; i++) {
+                        let song = results[i]
+                        let li = `<li data-id="${song.id}">${
+                            song.attributes.name
+                        } - ${song.attributes.artist}
+                            </li>`
+                        $('#searchResult').append(li)
+                    }
+                }
             })
         }
     }
@@ -43,23 +50,12 @@
             })
             $('input#search').on('input', e => {
                 let $input = $(e.currentTarget)
-                let value = $input.val()
-                let result = this.model.search(value)
-            })
-            function checkResult(result) {
-                if (result.length === 0) {
-                    this.view.noResult()
-                } else {
-                    for (var i = 0; i < result.length; i++) {
-                        let li = `
-                    <li data-id="${result[i].objectId}">
-                        ${result[i].name} - ${result[i].artist}
-                    </li>
-                    `
-                        this.view.displayResult(li)
-                    }
+                let value = $input.val().trim()
+                if (value === '') {
+                    return
                 }
-            }
+                this.model.search(value)
+            })
         }
     }
     controller.init(view, model)
