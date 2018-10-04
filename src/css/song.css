@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: Helvetica, sans-serif;
 }
 *::before,
 *::after {
@@ -23,6 +24,23 @@
     height: 100vh;
     background-size: cover;
 }
+.page > .logo {
+    position: absolute;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 50px;
+    width: 100%;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.3);
+    vertical-align: top;
+    z-index: 1;
+}
+.page > .logo > svg {
+    height: 24px;
+    width: 110px;
+}
+
 .backgroundWrapper {
     position: absolute;
     background: rgba(0, 0, 0, 0.6);
@@ -111,21 +129,27 @@
     text-align: center;
     line-height: 2;
     margin-top: 20px;
+    padding: 0 35px;
 }
 .song-description h1 {
     color: white;
     font-size: 18px;
+    font-weight: 400;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 .song-description p {
-    font-size: 14px;
-    line-height: 24px;
+    font-size: 16px;
+    line-height: 30px;
 }
 .song-description .lines {
     transition: transform 0.3s;
 }
 .song-description .lyric {
-    height: 72px;
+    height: 90px;
     overflow: hidden;
+    margin-top: 14px;
 }
 .song-description p.active {
     color: white;

@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>我的云音乐</title>
     <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="../vendors/loaders.min.css">
 </head>
 
 <body>
@@ -106,8 +107,13 @@
                 <section class="songs">
                     <h2 class="sectionTitle">最新音乐</h2>
                     <ol id="songs" class="list">
-                        <div id="songs-loading" class="square-spin" style="margin: 0 auto; width: 50px;">
-                            <div></div>
+                        <div class="loader">
+                            <div id="songs-loading" class="line-scale-party" style="margin: 0 auto; width: 50px;">
+                                <div style="background: #d43c33;"></div>
+                                <div style="background: #d43c33;"></div>
+                                <div style="background: #d43c33;"></div>
+                                <div style="background: #d43c33;"></div>
+                            </div>
                         </div>
                     </ol>
                 </section>

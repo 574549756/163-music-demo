@@ -28,6 +28,7 @@
                         .replace('{{song.artist}}', song.artist)
                         .replace('{{song.id}}', song.id)
                 )
+                $('#songs-loading').remove()
                 this.$el.find('ol.list').append($li)
             })
         }

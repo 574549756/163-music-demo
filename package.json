@@ -15,5 +15,8 @@
         "qiniu": "^7.2.1",
         "qiniu-js": "^1.0.22",
         "vconsole": "^3.2.0"
+    },
+    "devDependencies": {
+        "loaders.css": "^0.1.2"
     }
 }

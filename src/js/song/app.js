@@ -84,7 +84,7 @@
                 .siblings('.active')
                 .removeClass('active')
             this.$el.find('.lyric>.lines').css({
-                transform: `translateY(${-height + 24}px)`
+                transform: `translateY(${-height + 30}px)`
             })
         },
         play() {
