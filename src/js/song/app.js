@@ -22,7 +22,7 @@
                     this.pause()
                 }
                 audio.ontimeupdate = () => {
-                    this.showLyric(audio.currentTime)
+                    setInterval(this.showLyric(audio.currentTime), 300)
                 }
             }
             if (status === 'playing') {
@@ -73,7 +73,6 @@
                     }
                 }
             }
-
             let pHeight = p.getBoundingClientRect().top
             let linesHeight = this.$el
                 .find('.lyric>.lines')[0]
