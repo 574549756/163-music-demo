@@ -15,14 +15,14 @@
                     </div>
                     <div class="id">
                         <label>
-                            描述
-                            <textarea name="summary" value="__id__"></textarea>
+                            歌单id
+                            <input name="summary" value="__id__">
                         </label>
                     </div>
                     <div class="id">
                         <label>
-                            描述
-                            <textarea name="summary" value="__cover__"></textarea>
+                            封面
+                            <input name="summary" value="__cover__">
                         </label>
                     </div>
                     <div class="row">
@@ -61,28 +61,28 @@
             summary: ''
         },
         update(data) {
-            var song = AV.Object.createWithoutData('Song', this.data.id)
-            song.set('name', data.name)
-            song.set('id', data.id)
-            song.set('summary', data.summary)
-            song.set('cover', data.cover)
-            return song.save().then(response => {
+            var playlist = AV.Object.createWithoutData('Playlist', this.data.id)
+            playlist.set('name', data.name)
+            playlist.set('id', data.id)
+            playlist.set('summary', data.summary)
+            playlist.set('cover', data.cover)
+            return playlist.save().then(response => {
                 Object.assign(this.data, data)
                 return response
             })
         },
         create(data) {
             // 声明一个 Todo 类型
-            var Song = AV.Object.extend('Song')
+            var Playlist = AV.Object.extend('Playlist')
             // 新建一个 Todo 对象
-            var song = new Song()
-            song.set('name', data.name.replace('.mp3', ''))
-            song.set('id', data.id)
-            song.set('cover', data.cover)
-            song.set('summary', data.summary)
-            return song.save().then(
-                newSong => {
-                    let { id, attributes } = newSong
+            var playlist = new Playlist()
+            playlist.set('name', data.name.replace('.mp3', ''))
+            playlist.set('id', data.id)
+            playlist.set('cover', data.cover)
+            playlist.set('summary', data.summary)
+            return playlist.save().then(
+                newPlaylist => {
+                    let { id, attributes } = newPlaylist
                     Object.assign(this.data, {
                         id: id,
                         ...attributes
@@ -128,7 +128,7 @@
             this.view.render(data)
         },
         create() {
-            let needs = 'name artist id cover summary'.split(' ')
+            let needs = 'name id cover summary'.split(' ')
             let data = {}
             needs.map(string => {
                 data[string] = this.view.$el.find(`[name="${string}"]`).val()
@@ -141,7 +141,7 @@
             })
         },
         update() {
-            let needs = 'name artist id cover summary'.split(' ')
+            let needs = 'name  id cover summary'.split(' ')
             let data = {}
             needs.map(string => {
                 data[string] = this.view.$el.find(`[name="${string}"]`).val()
