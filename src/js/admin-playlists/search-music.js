@@ -28,10 +28,10 @@
                         let song = results[i]
                         let li = `
                         <li data-id="${song.id}">
-                            <a href="./song.html?id=${song.id}">${
+                            <p href="./song.html?id=${song.id}">${
                             song.attributes.name
                         } - ${song.attributes.artist}
-                        </a>
+                        </p>
                         </li>`
                         $('#searchResult').append(li)
                     }
