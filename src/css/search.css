@@ -1,0 +1,41 @@
+.m-input {
+    padding: 15px 10px;
+}
+.inputCover {
+    padding: 0px 30px;
+    width: 100%;
+    height: 30px;
+    background: #ebecec;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+}
+.inputCover > :first-child {
+    height: 14px;
+    width: 14px;
+    fill: #bcbdbd;
+    position: absolute;
+    left: 7px;
+}
+.inputCover > :last-child {
+    height: 14px;
+    width: 14px;
+    fill: #bcbdbd;
+    position: absolute;
+    right: 7px;
+    display: none;
+}
+.inputCover > #search {
+    width: 100%;
+    height: 30px;
+    font: 14px/1.5 Helvetica, sans-serif;
+    background: #ebecec;
+
+    border: none;
+    outline: none;
+}
+#search:valid + #cross {
+    display: block;
+}

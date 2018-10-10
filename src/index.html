@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>我的云音乐</title>
     <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/search.css">
     <link rel="stylesheet" href="../vendors/loaders.min.css">
 </head>
 
@@ -160,12 +161,23 @@
             </li>
             <li class="page-2">page 2</li>
             <li class="page-3">
-                <input id="search" type="text" style="background:#EBECEC;">
+                <form class="m-input">
+                    <div class="inputCover">
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#icon-search"></use>
+                        </svg>
+                        <input id="search" type="text" placeholder="搜索歌曲、歌手">
+                        <svg class="icon" aria-hidden="true" id="cross">
+                            <use xlink:href="#icon-jiaochacross78"></use>
+                        </svg>
+                    </div>
+                </form>
                 <ol id="searchResult"></ol>
             </li>
         </ol>
     </div>
     <script src="//at.alicdn.com/t/font_395875_4hwrep7mypx8ncdi.js"></script>
+    <script src="//at.alicdn.com/t/font_867711_0kkto4yro18h.js"></script>
     <script src="./../node_modules/leancloud-storage/dist/av-min.js"></script>
     <script src="./js/initializers/av.js"></script>
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
