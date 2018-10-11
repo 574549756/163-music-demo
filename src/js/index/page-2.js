@@ -23,10 +23,17 @@
             window.eventHub.on('selectTab', tabName => {
                 if (tabName === 'page-2') {
                     this.view.show()
+                    this.hotDate()
                 } else {
                     this.view.hide()
                 }
             })
+        },
+        hotDate() {
+            var date = new Date()
+            $('#hotTime').text(
+                `更新日期：${date.getMonth() + 1}月${date.getDate()}日`
+            )
         }
     }
     controller.init(view, model)
