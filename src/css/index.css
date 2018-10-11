@@ -57,7 +57,7 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 1;
+    z-index: 10;
     background: white;
 }
 section.topbar {
@@ -173,6 +173,9 @@ section.songs > .list {
 }
 section.songs > .list > li > h3 {
     font-size: 17px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 section.songs > .list > li > p {
     font-size: 12px;
@@ -183,7 +186,8 @@ section.songs > .list > li {
     margin-left: 10px;
     padding-bottom: 6px;
     padding-top: 5px;
-    border-bottom: 1px solid #e2e2e3;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding-right: 30px;
 }
 section.songs > .list .playButton {
     position: absolute;

@@ -65,3 +65,62 @@
     font-family: Helvetica, sans-serif;
     z-index: 1;
 }
+section.hotSongs > .list {
+    margin-top: 0;
+    font-style: normal;
+    font-variant-ligatures: normal;
+    font-variant-caps: normal;
+    font-variant-numeric: normal;
+    font-variant-east-asian: normal;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 1.5;
+    font-family: Helvetica, sans-serif;
+}
+section.hotSongs > .list > :first-child > .number,
+section.hotSongs > .list > :nth-child(2) > .number,
+section.hotSongs > .list > :nth-child(3) > .number {
+    color: #df3436;
+}
+section.hotSongs > .list > li > .container {
+    overflow: hidden;
+    padding-left: 10px;
+}
+section.hotSongs > .list > li > div > h3 {
+    font-size: 17px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+section.hotSongs > .list > li > div > p {
+    font-size: 12px;
+    color: #888;
+}
+section.hotSongs > .list > li {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+    padding-bottom: 6px;
+    padding-top: 5px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding-right: 30px;
+}
+section.hotSongs > .list > li > .number {
+    font-size: 17px;
+}
+section.hotSongs > .list .playButton {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+section.hotSongs > .list .icon-play {
+    width: 22px;
+    height: 22px;
+    vertical-align: middle;
+    fill: #aaa;
+}
+section.hotSongs > .list .icon-sq {
+    fill: #fe672e;
+}
