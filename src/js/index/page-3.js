@@ -28,6 +28,9 @@
                         let song = results[i]
                         let li = `
                         <li data-id="${song.id}">
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-search"></use>
+                            </svg>
                             <a href="./song.html?id=${song.id}">${
                             song.attributes.name
                         } - ${song.attributes.artist}
@@ -55,12 +58,23 @@
                 }
             })
             let timer = null
+            $('#cross').on('click', e => {
+                let value = $('input#search').val('')
+            })
             $('input#search').on('input', e => {
+                if (
+                    $(e.currentTarget)
+                        .val()
+                        .trim()
+                ) {
+                    $('#cross').addClass('active')
+                } else {
+                    $('#cross').removeClass('active')
+                }
                 if (timer) {
                     window.clearTimeout(timer)
                 }
                 timer = setTimeout(() => {
-                    console.log('时间到')
                     timer = null
                     let $input = $(e.currentTarget)
                     let value = $input.val().trim()
