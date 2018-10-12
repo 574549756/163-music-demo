@@ -39,7 +39,7 @@
                 } else {
                     let $li = $(
                         this.template
-                            .replace('{{song.number}}', i)
+                            .replace('{{song.number}}', i + 1)
                             .replace('{{song.name}}', songs[i].name)
                             .replace('{{song.artist}}', songs[i].artist)
                             .replace('{{song.id}}', songs[i].id)

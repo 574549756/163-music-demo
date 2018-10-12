@@ -22,7 +22,8 @@
             query.find().then(function(results) {
                 $('#searchResult').empty()
                 if (results.length === 0) {
-                    $('#searchResult').html('没有结果')
+                    let noResult = `<div>暂无搜索结果</div>`
+                    $('#searchResult').append(noResult)
                 } else {
                     for (var i = 0; i < results.length; i++) {
                         let song = results[i]
@@ -60,6 +61,8 @@
             let timer = null
             $('#cross').on('click', e => {
                 let value = $('input#search').val('')
+                $('#searchResult').empty()
+                $('#cross').removeClass('active')
             })
             $('input#search').on('input', e => {
                 if (
@@ -79,6 +82,7 @@
                     let $input = $(e.currentTarget)
                     let value = $input.val().trim()
                     if (value === '') {
+                        $('#searchResult').empty()
                         return
                     }
                     this.model.search(value)

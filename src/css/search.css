@@ -59,3 +59,9 @@
     font-family: Helvetica, sans-serif;
     line-height: 45px;
 }
+#searchResult > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+}
