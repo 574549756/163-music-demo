@@ -1,45 +1,49 @@
 {
     let view = {
-        el: '.page > main',
+        el: '.page >.musicInfoContainer > main',
         init() {
             this.$el = $(this.el)
         },
         template: `
-            <form class=form>
-                <div class="row">
-                    <label for="">
-                        歌名
-                    </label>
+            <form class="form">
+                <div class="leftMain">
+                    <div class="row">
+                        <label for="">
+                            歌名
+                        </label>
 
-                    <input name="name" type="text" value="__name__">
-                </div>
-                <div class="row">
-                    <label for="">
-                        歌手
-                    </label>
+                        <input name="name" type="text" value="__name__">
+                    </div>
+                    <div class="row">
+                        <label for="">
+                            歌手
+                        </label>
 
-                    <input name="artist" type="text" value="__artist__">
-                </div>
-                <div class="row">
-                    <label for="">
-                        外链
-                    </label>
-                    <input name="url" type="text" value="__url__">
-                </div>
-                <div class="row">
-                    <label for="">
-                        封面
-                    </label>
-                    <input name="cover" type="text" value="__cover__">
-                </div>
-                <div class="row">
-                    <label for="">
-                        歌词
-                    </label>
-                    <textarea name="lyrics">__lyrics__</textarea>
-                </div>
-                <div class="row actions">
+                        <input name="artist" type="text" value="__artist__">
+                    </div>
+                    <div class="row">
+                        <label for="">
+                            外链
+                        </label>
+                        <input name="url" type="text" value="__url__">
+                    </div>
+                    <div class="row">
+                        <label for="">
+                            封面
+                        </label>
+                        <input name="cover" type="text" value="__cover__">
+                    </div>
+                    <div class="row actions">
                     <button type="submit">保存</button>
+                </div>
+                </div>
+                <div class="rightMain">
+                    <div class="row">
+                        <label for="">
+                            歌词
+                        </label>
+                        <textarea name="lyrics">__lyrics__</textarea>
+                    </div>
                 </div>
             </form>
         `,
