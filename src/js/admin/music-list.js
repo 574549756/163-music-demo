@@ -3,26 +3,26 @@
         el: '#musicList-container',
         templete: `
         <ul class="musicList">
-                    <li v-for="song in songs">
-                    </li>
-                </ul>
+            <ul v-for="song in songs">
+            <ul/>
+        </ul>
         `,
         render(data) {
             let $el = $(this.el)
             $el.html(this.templete)
             let { songs, selectedSongId } = data
             let liList = songs.map(song => {
-                let $li = $('<li></li>')
-                    .text(song.name)
+                let $li = $('<ul></ul>')
+                    .html(`<li>${song.name}</li><li>${song.artist}</li>`)
                     .attr('data-song-id', song.id)
                 if (song.id === selectedSongId) {
                     $li.addClass('active')
                 }
                 return $li
             })
-            $el.find('ul').empty()
+            $el.find('.musicList').empty()
             liList.map(domLi => {
-                $el.find('ul').append(domLi)
+                $el.find('.musicList').append(domLi)
             })
         },
         clearActive() {
@@ -61,7 +61,7 @@
             })
         },
         bindEvents() {
-            $(this.view.el).on('click', 'li', e => {
+            $(this.view.el).on('click', '.musicList>ul', e => {
                 let songId = e.currentTarget.getAttribute('data-song-id')
 
                 // 记录　渲染
