@@ -270,6 +270,8 @@ textarea {
 }
 .musicInfoContainer > main > .form > .leftMain > .row.actions {
     margin-top: 40px;
+    display: flex;
+    justify-content: center;
 }
 .musicInfoContainer > main > .form input[type='text'] {
     padding: 3px 8px;
@@ -285,7 +287,7 @@ textarea {
 .musicInfoContainer > main > .form button {
     cursor: pointer;
     height: 40px;
-    width: 185px;
+    width: 100%;
     font-size: 16px;
     color: white;
     border-radius: 20px;
