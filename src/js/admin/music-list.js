@@ -13,7 +13,14 @@
             let { songs, selectedSongId } = data
             let liList = songs.map(song => {
                 let $li = $('<ul></ul>')
-                    .html(`<li>${song.name}</li><li>${song.artist}</li>`)
+                    .html(
+                        `<svg class="icon" aria-hidden="true"><use xlink: href="#icon-wangyiyunyinyuemusic1193417easyiconnet"></use></svg>
+                        <li>${
+                            song.name
+                        }</li><li><svg class="icon" aria-hidden="true">
+                            <use xlink:href="#icon-micc"></use>
+                        </svg>${song.artist}</li>`
+                    )
                     .attr('data-song-id', song.id)
                 if (song.id === selectedSongId) {
                     $li.addClass('active')

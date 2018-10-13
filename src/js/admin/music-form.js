@@ -8,29 +8,19 @@
             <form class="form">
                 <div class="leftMain">
                     <div class="row">
-                        <label for="">
-                            歌名
-                        </label>
-
+                        <label for="">歌名</label>
                         <input name="name" type="text" value="__name__">
                     </div>
                     <div class="row">
-                        <label for="">
-                            歌手
-                        </label>
-
+                        <label for="">歌手</label>
                         <input name="artist" type="text" value="__artist__">
                     </div>
                     <div class="row">
-                        <label for="">
-                            外链
-                        </label>
+                        <label for="">外链</label>
                         <input name="url" type="text" value="__url__">
                     </div>
                     <div class="row">
-                        <label for="">
-                            封面
-                        </label>
+                        <label for="">封面</label>
                         <input name="cover" type="text" value="__cover__">
                     </div>
                     <div class="row actions">
@@ -62,9 +52,13 @@
             })
             $(this.el).html(html)
             if (data.id) {
-                $(this.el).prepend('<h1>编辑歌曲</h1>')
+                $(this.el).prepend(
+                    '<h1>编辑歌曲</h1><div class="breakLine"></div>'
+                )
             } else {
-                $(this.el).prepend('<h1>新建歌曲</h1>')
+                $(this.el).prepend(
+                    '<h1>新建歌曲</h1><div class="breakLine"></div>'
+                )
             }
         },
         reset() {

@@ -1,6 +1,7 @@
 * {
     margin: 0;
     padding: 0;
+    font-family: Helvetica, sans-serif;
 }
 * {
     box-sizing: border-box;
@@ -22,44 +23,81 @@ a {
 body {
     font-size: 12px;
     line-height: 1.5;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 input {
     font-size: inherit;
 }
 textarea {
-    height: 200px;
+    padding: 10px;
+    padding-top: 0;
+    height: 310px;
     width: 500px;
-    border-radius: 5px;
-    border: none;
+    border: 1px solid #ddd;
+    border-top: none;
+    resize: none;
+    outline: none;
 }
 
 /* layout */
-
 .page {
     display: flex;
-    height: 100vh;
+    height: 90vh;
+    width: 90vw;
+    box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.2);
 }
 .page > aside {
-    width: 300px;
+    width: 400px;
     display: flex;
     flex-direction: column;
+    box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.2);
+    z-index: 1;
 }
 .page > main {
     flex-grow: 1;
 }
-
+.page > aside > .iconHeader {
+    background: #d43c33;
+    padding: 17px 10px;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+}
+.page > aside > .iconHeader > svg {
+    height: 25px;
+    width: 142px;
+}
 /* aside */
 
-.page > aside > .newMusic {
-    padding: 10px;
+.page > aside > .iconHeader > .newMusic {
+    font-size: 16px;
+    height: 25px;
+    width: 60px;
+    line-height: 23px;
+    border-radius: 5px;
+    color: #d43c33;
     text-align: center;
-    border-bottom: 1px solid #999;
+    background: white;
+    border: 1px solid#d43c33;
+    cursor: pointer;
+    transition: all 0.5s;
 }
-.newMusic.active {
-    background: #d4d4d4;
+.page > aside > .iconHeader > .newMusic.active {
+    color: white;
+    border: 1px solid white;
+    background: #d43c33;
+    line-height: 23px;
 }
 #musicList-container {
     flex-grow: 1;
+    overflow: scroll;
+    width: 400px;
+}
+#musicList-container::-webkit-scrollbar {
+    display: none;
 }
 .musicList {
     flex: 1;
@@ -67,13 +105,49 @@ textarea {
 }
 .musicList > ul {
     border-bottom: 1px solid #ddd;
-    padding: 10px;
+    padding: 10px 10px 10px 40px;
     margin: 0 10px;
+    transition: all 0.5s;
+    position: relative;
+    cursor: pointer;
+}
+.musicList > ul > li {
+    font: 14px/1.5 Helvetica, sans-serif;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.musicList > ul > svg {
+    fill: #d43c33;
+    position: absolute;
+    left: 5px;
+    top: 19px;
+    height: 25px;
+    width: 25px;
+}
+.musicList > ul > li:nth-child(2) {
+    color: black;
+    font-size: 16px;
+}
+.musicList > ul > li:nth-child(3) {
+    color: #888;
+    font-size: 12px;
+}
+
+.musicList > ul > li > svg {
+    fill: #d43c33;
+    height: 12px;
+    width: 12px;
 }
 .musicList > ul.active {
-    background: #d4d4d4;
+    border-left: 3px solid #d43c33;
+    background: #f8f8f8;
+    padding: 10px 10px 10px 47px;
     margin: 0;
-    padding: 10px 20px;
+}
+.musicList > ul.active > svg {
+    position: absolute;
+    left: 12px;
 }
 .eventButton {
     display: flex;
@@ -82,16 +156,27 @@ textarea {
 }
 .eventButton > div {
     text-align: center;
-    line-height: 30px;
-    height: 30px;
-    width: 70px;
+    line-height: 40px;
+    height: 40px;
+    border-radius: 20px;
+    margin: 20px 0;
+    width: 185px;
+    color: #d43c33;
+    font-weight: 300;
+    font-size: 16px;
+    background: white;
+    border: 1px solid #d43c33;
+}
+.eventButton > div.active {
     background: #d43c33;
+    color: white;
 }
 .uploadArea {
+    background: white;
 }
 .draggable {
     text-align: center;
-    border: 2px dashed #dddddd;
+    border: 2px dashed #d43c33;
     border-radius: 4px;
     display: flex;
     flex-direction: column;
@@ -101,53 +186,136 @@ textarea {
 }
 .clickable {
     cursor: pointer;
-    display: table;
-    padding: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    background: white;
+    padding: 140px;
     width: 100%;
     height: 100%;
 }
+.clickable > span {
+    background: #d43c33d8;
+    display: block;
+    text-align: center;
+    line-height: 24px;
+    height: 30px;
+    border-radius: 15px;
+    width: 155px;
+    color: white;
+    font-weight: 300;
+    font-size: 14px;
+    border: 3px solid #d43c33;
+}
+.clickable > p {
+    font-size: 14px;
+    margin-right: 30px;
+    font-weight: 800;
+    color: rgb(134, 134, 134);
+}
 
 /* main */
-.form {
+.musicInfoContainer > main {
+    padding: 10px;
+    margin-top: 40px;
+}
+.musicInfoContainer > main > h1 {
+    font-weight: 300;
+    font-size: 25px;
+}
+.musicInfoContainer > main > .breakLine {
+    width: 100%;
+    height: 2px;
+    background: #ddd;
+    position: relative;
+}
+.musicInfoContainer > main > .breakLine::after {
+    content: '';
+    position: absolute;
+    height: 4px;
+    display: block;
+    left: 0;
+    top: -1px;
+    width: 40px;
+    background: #d43c33;
+}
+.musicInfoContainer > main > .form {
     font-size: 14px;
     display: flex;
+    justify-content: space-between;
 }
-.form > div > .row {
-    margin: 20px 0;
+.musicInfoContainer > main > .form > .leftMain {
+    height: 100%;
+    margin-top: 30px;
+}
+.musicInfoContainer > main > .form > div > .row {
+    height: 50px;
+    margin: 25px 0;
     display: flex;
 }
-.form > div > .row > label {
+.musicInfoContainer > main > .form > .leftMain > .row > label {
+    border: 1px solid #ddd;
+    border-right: none;
+    top: 0;
+    color: #888;
+    background: white;
+    font-size: 12px;
     align-items: center;
     display: flex;
     justify-content: flex-end;
-    width: 4em;
+    width: 3em;
+    height: 50px;
     text-align: right;
-    margin-right: 5px;
 }
-.form > .row.actions {
-    margin-left: calc(4em + 5px);
+.musicInfoContainer > main > .form > .leftMain > .row.actions {
+    margin-top: 40px;
 }
-.form input[type='text'] {
+.musicInfoContainer > main > .form input[type='text'] {
     padding: 3px 8px;
-    border-radius: 5px;
+    border: none;
+    height: 50px;
+    width: 300px;
+    outline: none;
     border: 1px solid #ddd;
-    height: 30px;
+    border-left: none;
 }
-.form input[type='button'],
-.form input[type='submit'],
-.form button {
+.musicInfoContainer > main > .form input[type='button'],
+.musicInfoContainer > main > .form input[type='submit'],
+.musicInfoContainer > main > .form button {
     cursor: pointer;
-    height: 30px;
-    padding-left: 10px;
-    padding-right: 10px;
-    border-radius: 5px;
-    background: white;
+    height: 40px;
+    width: 185px;
+    font-size: 16px;
+    color: white;
+    border-radius: 20px;
+    background: #d43c33;
     border: 1px solid #ddd;
+}
+.musicInfoContainer > main > .form > .rightMain {
+    margin-top: 30px;
+}
+.musicInfoContainer > main > .form > .rightMain > .row {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin: 25px 0;
+}
+.musicInfoContainer > main > .form > .rightMain > .row > label {
+    border: 1px solid #ddd;
+    border-bottom: none;
+    padding: 10px;
+    color: #888;
+    background: white;
+    font-size: 12px;
+    align-items: center;
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
 }
 .page > main {
-    padding-top: 20px;
-    padding-left: 20px;
-    background: #d4d4d4;
+    padding: 20px;
+    background: #f4f4f4;
 }
 .page > main > .form {
 }
