@@ -1,6 +1,6 @@
 {
     let view = {
-        el: '.page > main',
+        el: '.page >.musicInfoContainer> main',
         init() {
             this.$el = $(this.el)
         },

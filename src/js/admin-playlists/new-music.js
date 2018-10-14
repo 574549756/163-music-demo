@@ -1,7 +1,7 @@
 {
     let view = {
         el: '.newMusic',
-        template: `新建歌单`,
+        template: `New`,
         render(data) {
             $(this.el).html(this.template)
         }
