@@ -35,7 +35,7 @@ textarea {
     padding: 10px;
     padding-top: 0;
     height: 310px;
-    width: 500px;
+    width: 100%;
     border: 1px solid #ddd;
     border-top: none;
     resize: none;
@@ -191,7 +191,7 @@ textarea {
     align-items: center;
     flex-direction: row;
     background: white;
-    padding: 140px;
+    padding: 70px;
     width: 100%;
     height: 100%;
 }
@@ -247,7 +247,6 @@ textarea {
 }
 .musicInfoContainer > main > .form > .leftMain {
     height: 100%;
-    margin-top: 30px;
 }
 .musicInfoContainer > main > .form > div > .row {
     height: 50px;
@@ -295,12 +294,13 @@ textarea {
     border: 1px solid #ddd;
 }
 .musicInfoContainer > main > .form > .rightMain {
-    margin-top: 30px;
+    width: 100%;
+    margin: 0 0 0 20px;
 }
 .musicInfoContainer > main > .form > .rightMain > .row {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: 46vh;
     margin: 25px 0;
 }
 .musicInfoContainer > main > .form > .rightMain > .row > label {
