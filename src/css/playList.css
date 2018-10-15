@@ -29,3 +29,115 @@
     padding: 10px 10px 10px 17px;
     margin: 0;
 }
+.playListClickable {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    background: white;
+    padding: 90px;
+    width: 100%;
+    height: 100%;
+}
+.playListClickable > span {
+    background: #d43c33d8;
+    display: block;
+    text-align: center;
+    line-height: 24px;
+    height: 30px;
+    border-radius: 15px;
+    width: 155px;
+    color: white;
+    font-weight: 300;
+    font-size: 14px;
+    border: 3px solid #d43c33;
+}
+.playListClickable > p {
+    font-size: 14px;
+    margin-right: 30px;
+    font-weight: 800;
+    color: rgb(134, 134, 134);
+}
+.musicInfoContainer > main > .playlistForm {
+    font-size: 14px;
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+.musicInfoContainer > main > .playlistForm > .leftMain {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: space-between;
+}
+.musicInfoContainer > main > .playlistForm > div > .row {
+    height: 50px;
+    margin: 25px 0 0 0;
+    display: flex;
+}
+.musicInfoContainer > main > .playlistForm > .leftMain > .row > label {
+    border: 1px solid #ddd;
+    border-right: none;
+    top: 0;
+    color: #888;
+    background: white;
+    font-size: 12px;
+    align-items: center;
+    display: flex;
+    justify-content: flex-end;
+    width: 4em;
+    height: 50px;
+    text-align: right;
+}
+.musicInfoContainer > main > .playlistForm > .leftMain > .row.actions {
+    display: flex;
+    justify-content: center;
+}
+.musicInfoContainer > main > .playlistForm input[type='text'] {
+    padding: 3px 8px;
+    border: none;
+    height: 50px;
+    width: 300px;
+    outline: none;
+    border: 1px solid #ddd;
+    border-left: none;
+}
+.musicInfoContainer > main > .playlistForm input[type='button'],
+.musicInfoContainer > main > .playlistForm input[type='submit'],
+.musicInfoContainer > main > .playlistForm button {
+    cursor: pointer;
+    height: 40px;
+    width: 100%;
+    font-size: 16px;
+    color: white;
+    border-radius: 20px;
+    background: #d43c33;
+    border: 1px solid #ddd;
+}
+.musicInfoContainer > main > .playlistForm > .rightMain {
+    width: 100%;
+    margin: 0 0 0 20px;
+}
+.musicInfoContainer > main > .playlistForm > .rightMain > .row {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    margin: 25px 0 0 0;
+}
+.musicInfoContainer > main > .playlistForm > .rightMain > .row > label {
+    border: 1px solid #ddd;
+    border-bottom: none;
+    padding: 10px;
+    color: #888;
+    background: white;
+    font-size: 12px;
+    align-items: center;
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+}
+.musicInfoContainer > main > .playlistForm > .rightMain > .row > textarea {
+    height: 38%;
+}

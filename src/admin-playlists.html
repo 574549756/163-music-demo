@@ -65,7 +65,7 @@
         <main class="musicInfoContainer">
             <div class="uploadArea">
                 <div id="uploadContainer" class="draggable">
-                    <div id="uploadButton" class="clickable">
+                    <div id="uploadButton" class="playListClickable">
                         <p>上传歌单封面,大小不能超过 20MB</p>
                         <span>点击或拖曳上传</span>
                     </div>
@@ -76,13 +76,13 @@
                 <form class="playlistForm" action="">
                 </form>
             </div>
+            <footer>
+                <li class='search-area'>
+                    <input id="search" type="text" style="background:#EBECEC;">
+                    <ol id="searchResult"></ol>
+                </li>
+            </footer>
         </main>
-        <footer>
-            <li class='search-area'>
-                <input id="search" type="text" style="background:#EBECEC;">
-                <ol id="searchResult"></ol>
-            </li>
-        </footer>
     </div>
     <script src="./../node_modules/leancloud-storage/dist/av-min.js"></script>
     <script src="./js/initializers/av.js"></script>

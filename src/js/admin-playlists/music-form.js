@@ -5,23 +5,28 @@
             this.$el = $(this.el)
         },
         template: `
-            <form class=playlistForm>
-                <div class="row">
+            <form class="playlistForm">
+            <div class="leftMain">
+                
                     <div class="row">
                         <label>歌单名</label>
                         <input type="text" name="name" value="__name__">
                     </div>
                     <div class="row">
                         <label>封面</label>
-                        <input name="url" value="__url__">
+                        <input type="text" name="url" value="__url__">
                     </div>
+                    <div class="row actions">
+                    <button type="submit">创建</button>
+                </div>
+            </div>
+                    <div class="rightMain">
                     <div class="row">
                         <label>描述</label>
                         <textarea name="summary">__summary__</textarea>
                     </div>
-                <div class="row actions">
-                    <button type="submit">创建</button>
-                </div>
+                    
+                    </div>
             </form>
         `,
         render(data = {}) {
@@ -32,9 +37,13 @@
             })
             $(this.el).html(html)
             if (data.id) {
-                $(this.el).prepend('<h1>编辑歌单</h1>')
+                $(this.el).prepend(
+                    '<h1>编辑歌单</h1><div class="breakLine"></div>'
+                )
             } else {
-                $(this.el).prepend('<h1>新建歌单</h1>')
+                $(this.el).prepend(
+                    '<h1>新建歌单</h1><div class="breakLine"></div>'
+                )
             }
         },
         reset() {
