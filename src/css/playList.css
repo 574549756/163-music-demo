@@ -59,6 +59,9 @@
     font-weight: 800;
     color: rgb(134, 134, 134);
 }
+.musicInfoContainer.list {
+    position: relative;
+}
 .musicInfoContainer > main > .playlistForm {
     font-size: 14px;
     margin-top: 30px;
@@ -93,6 +96,7 @@
 .musicInfoContainer > main > .playlistForm > .leftMain > .row.actions {
     display: flex;
     justify-content: center;
+    height: 0;
 }
 .musicInfoContainer > main > .playlistForm input[type='text'] {
     padding: 3px 8px;
@@ -103,12 +107,15 @@
     border: 1px solid #ddd;
     border-left: none;
 }
-.musicInfoContainer > main > .playlistForm input[type='button'],
-.musicInfoContainer > main > .playlistForm input[type='submit'],
-.musicInfoContainer > main > .playlistForm button {
+.musicInfoContainer.list > main > .playlistForm input[type='button'],
+.musicInfoContainer.list > main > .playlistForm input[type='submit'],
+.musicInfoContainer.list > main > .playlistForm button {
     cursor: pointer;
+    position: absolute;
     height: 40px;
-    width: 100%;
+    width: 350px;
+    bottom: 20px;
+    left: 20px;
     font-size: 16px;
     color: white;
     border-radius: 20px;
@@ -139,5 +146,5 @@
     width: 100%;
 }
 .musicInfoContainer > main > .playlistForm > .rightMain > .row > textarea {
-    height: 38%;
+    height: 49%;
 }
