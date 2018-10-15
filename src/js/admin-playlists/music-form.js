@@ -108,6 +108,9 @@
                 this.model.data = data
                 this.view.render(this.model.data)
             })
+            window.eventHub.on('addsong' ,musicId=>{
+                
+            })
             window.eventHub.on('new', data => {
                 if (this.model.data.id) {
                     this.model.data = {

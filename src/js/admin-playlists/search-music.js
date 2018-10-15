@@ -1,6 +1,6 @@
 {
     let view = {
-        el: '.search-areasearch-area',
+        el: '.page-3',
         init() {
             this.$el = $(this.el)
         },
@@ -22,15 +22,19 @@
             query.find().then(function(results) {
                 $('#searchResult').empty()
                 if (results.length === 0) {
-                    $('#searchResult').html('没有结果')
+                    let noResult = `<div>暂无搜索结果</div>`
+                    $('#searchResult').append(noResult)
                 } else {
                     for (var i = 0; i < results.length; i++) {
                         let song = results[i]
                         let li = `
-                        <li data-id="${song.id}">
-                            <p href="./song.html?id=${song.id}">${
-                            song.attributes.name
-                        } - ${song.attributes.artist}
+                        <li id="addSong" data-id="${song.id}">
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-search"></use>
+                            </svg>
+                            <p>${song.attributes.name} - ${
+                            song.attributes.artist
+                        }
                         </p>
                         </li>`
                         $('#searchResult').append(li)
@@ -55,16 +59,34 @@
                 }
             })
             let timer = null
+            $('#cross').on('click', e => {
+                let value = $('input#search').val('')
+                $('#searchResult').empty()
+                $('#cross').removeClass('active')
+            })
+            $('#addSong').on('click', e => {
+                let musicId = e.currentTarget.getAttribute('data-id')
+                window.eventHub.emit('addSong', musicId)
+            })
             $('input#search').on('input', e => {
+                if (
+                    $(e.currentTarget)
+                        .val()
+                        .trim()
+                ) {
+                    $('#cross').addClass('active')
+                } else {
+                    $('#cross').removeClass('active')
+                }
                 if (timer) {
                     window.clearTimeout(timer)
                 }
                 timer = setTimeout(() => {
-                    console.log('时间到')
                     timer = null
                     let $input = $(e.currentTarget)
                     let value = $input.val().trim()
                     if (value === '') {
+                        $('#searchResult').empty()
                         return
                     }
                     this.model.search(value)

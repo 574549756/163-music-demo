@@ -65,3 +65,33 @@
     align-items: center;
     padding: 20px 0;
 }
+.search-area {
+    width: 348px;
+    background: white;
+    height: 250px;
+    border: 1px solid #ddd;
+    list-style: none;
+}
+.search-area > #searchResult {
+    overflow: scroll;
+    height: 190px;
+}
+.search-area > #searchResult::-webkit-scrollbar {
+    display: none;
+}
+.search-area > #searchResult > li {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.search-area > #searchResult > li > svg {
+    height: 15px;
+    width: 15px;
+}
+.search-area > #searchResult > li > p {
+    font-size: 12px;
+    font-family: Helvetica, sans-serif;
+    line-height: 40px;
+    display: block;
+    width: 290px;
+}

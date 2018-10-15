@@ -8,6 +8,7 @@
     <title>歌单管理页面</title>
     <link rel="stylesheet" href="./css/default.css">
     <link rel="stylesheet" href="./css/playList.css">
+    <link rel="stylesheet" href="./css/search.css">
 </head>
 
 <body>
@@ -78,12 +79,25 @@
             </div>
             <footer>
                 <li class='search-area'>
-                    <input id="search" type="text" style="background:#EBECEC;">
-                    <ol id="searchResult"></ol>
+                    <form class="m-input">
+                        <div class="inputCover">
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-search"></use>
+                            </svg>
+                            <input id="search" type="text" placeholder="搜索歌曲、歌手">
+                            <svg class="icon" aria-hidden="true" id="cross">
+                                <use xlink:href="#icon-jiaochacross78"></use>
+                            </svg>
+                        </div>
+                    </form>
+                    <ol id="searchResult">
+                    </ol>
                 </li>
             </footer>
         </main>
     </div>
+    <script src="//at.alicdn.com/t/font_395875_4hwrep7mypx8ncdi.js"></script>
+    <script src="//at.alicdn.com/t/font_867711_k0lbuurrqod.js"></script>
     <script src="./../node_modules/leancloud-storage/dist/av-min.js"></script>
     <script src="./js/initializers/av.js"></script>
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
