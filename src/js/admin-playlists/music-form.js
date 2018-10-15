@@ -24,7 +24,7 @@
                 </div>
             </form>
         `,
-        render(data = {}) {
+        render(data = {}) { 
             let placeHolders = ['name', 'summary', 'id', 'url']
             let html = this.template
             placeHolders.map(string => {
