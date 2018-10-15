@@ -154,7 +154,7 @@ textarea {
     justify-content: space-around;
     align-items: center;
 }
-.eventButton > div {
+.eventButton > a {
     cursor: pointer;
     text-align: center;
     line-height: 40px;
@@ -168,7 +168,7 @@ textarea {
     background: white;
     border: 1px solid #d43c33;
 }
-.eventButton > div.active {
+.eventButton > a.active {
     background: #d43c33;
     color: white;
 }

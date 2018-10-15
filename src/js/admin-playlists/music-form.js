@@ -8,28 +8,16 @@
             <form class=playlistForm>
                 <div class="row">
                     <div class="row">
-                        <label>
-                            歌单名
-                            <input type="text" name="name" value="__name__">
-                        </label>
-                    </div>
-                    <div class="id">
-                        <label>
-                            歌单id
-                            <input name="summary" value="__id__">
-                        </label>
-                    </div>
-                    <div class="id">
-                        <label>
-                            封面
-                            <input name="summary" value="__cover__">
-                        </label>
+                        <label>歌单名</label>
+                        <input type="text" name="name" value="__name__">
                     </div>
                     <div class="row">
-                        <label>
-                            描述
-                            <textarea name="summary" value="__summary__"></textarea>
-                        </label>
+                        <label>封面</label>
+                        <input name="url" value="__url__">
+                    </div>
+                    <div class="row">
+                        <label>描述</label>
+                        <textarea name="summary">__summary__</textarea>
                     </div>
                 <div class="row actions">
                     <button type="submit">创建</button>
@@ -37,7 +25,7 @@
             </form>
         `,
         render(data = {}) {
-            let placeHolders = ['name', 'summary', 'id', 'cover']
+            let placeHolders = ['name', 'summary', 'id', 'url']
             let html = this.template
             placeHolders.map(string => {
                 html = html.replace(`__${string}__`, data[string] || '')
@@ -57,7 +45,7 @@
         data: {
             name: '',
             id: '',
-            cover: '',
+            url: '',
             summary: ''
         },
         update(data) {
@@ -65,7 +53,7 @@
             playlist.set('name', data.name)
             playlist.set('id', data.id)
             playlist.set('summary', data.summary)
-            playlist.set('cover', data.cover)
+            playlist.set('url', data.url)
             return playlist.save().then(response => {
                 Object.assign(this.data, data)
                 return response
@@ -76,9 +64,10 @@
             var Playlist = AV.Object.extend('Playlist')
             // 新建一个 Todo 对象
             var playlist = new Playlist()
-            playlist.set('name', data.name.replace('.mp3', ''))
+            console.log(data)
+            playlist.set('name', data.name)
             playlist.set('id', data.id)
-            playlist.set('cover', data.cover)
+            playlist.set('url', data.url)
             playlist.set('summary', data.summary)
             return playlist.save().then(
                 newPlaylist => {
@@ -115,7 +104,7 @@
                     this.model.data = {
                         name: '',
                         id: '',
-                        cover: '',
+                        url: '',
                         summary: ''
                     }
                 } else {
@@ -128,11 +117,12 @@
             this.view.render(data)
         },
         create() {
-            let needs = 'name id cover summary'.split(' ')
+            let needs = 'name url summary'.split(' ')
             let data = {}
             needs.map(string => {
                 data[string] = this.view.$el.find(`[name="${string}"]`).val()
             })
+            console.log(data)
             this.model.create(data).then(() => {
                 this.view.reset()
                 let stringCopy = JSON.stringify(this.model.data)
@@ -141,7 +131,7 @@
             })
         },
         update() {
-            let needs = 'name  id cover summary'.split(' ')
+            let needs = 'name url summary'.split(' ')
             let data = {}
             needs.map(string => {
                 data[string] = this.view.$el.find(`[name="${string}"]`).val()
