@@ -67,7 +67,7 @@
             })
         },
         bindEvents() {
-            $(this.view.el).on('click', 'ul', e => {
+            $(this.view.el).on('click', '.playList>ul', e => {
                 let playlistId = e.currentTarget.getAttribute(
                     'data-playlist-id'
                 )
@@ -84,9 +84,6 @@
                         break
                     }
                 }
-                console.log(data)
-                console.log(JSON.stringify(data))
-                console.log(JSON.parse(JSON.stringify(data)))
                 let object = JSON.parse(JSON.stringify(data))
                 window.eventHub.emit('select', object)
             })
