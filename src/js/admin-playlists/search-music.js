@@ -89,14 +89,22 @@
                     var courseList = new AV.Query('Course')
                     courseList.contains('playlistId', playlistId)
 
-                    courseList.find().then(function(result) {
-                        return result
+                    function listResult() {
+                        return courseList.find().then(function(result) {
+                            result.map(playlist => {
+                                return {
+                                    id: playlist.id,
+                                    ...playlist.attributes
+                                }
+                            })
+                            return result
+                        })
+                    }
+                    console.log(listResult())
+                    var ListResult = listResult.results.map(function(item) {
+                        return item.id
                     })
-                    var playlists = AV.Object.createWithoutData(
-                        'Course',
-                        playlistId
-                    )
-
+                    console.log(ListResult)
                     var query = new AV.Query('playlistMap')
 
                     query.equalTo('playlist', playlists)
