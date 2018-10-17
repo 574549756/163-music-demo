@@ -7,7 +7,6 @@
         template: `
             <form class="playlistForm">
             <div class="leftMain">
-                
                     <div class="row">
                         <label>歌单名</label>
                         <input type="text" name="name" value="__name__">
@@ -108,9 +107,7 @@
                 this.model.data = data
                 this.view.render(this.model.data)
             })
-            window.eventHub.on('addsong' ,musicId=>{
-                
-            })
+            window.eventHub.on('addsong', musicId => {})
             window.eventHub.on('new', data => {
                 if (this.model.data.id) {
                     this.model.data = {

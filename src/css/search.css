@@ -95,3 +95,9 @@
     display: block;
     width: 290px;
 }
+footer {
+    display: flex;
+}
+#addSong2list {
+    cursor: pointer;
+}

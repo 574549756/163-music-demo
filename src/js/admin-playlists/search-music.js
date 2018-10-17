@@ -28,7 +28,7 @@
                     for (var i = 0; i < results.length; i++) {
                         let song = results[i]
                         let li = `
-                        <li id="addSong" data-id="${song.id}">
+                        <li class="addSong2list" data-id="${song.id}">
                             <svg class="icon" aria-hidden="true">
                                 <use xlink:href="#icon-search"></use>
                             </svg>
@@ -64,8 +64,29 @@
                 $('#searchResult').empty()
                 $('#cross').removeClass('active')
             })
-            $('#addSong').on('click', e => {
+            $('.addSong2list>p').on('click', e => {
+                console.log('是阻止冒泡问题')
+            })
+
+            $('.addSong2list').on('click', e => {
+                console.log('这里执行了')
                 let musicId = e.currentTarget.getAttribute('data-id')
+                let playlistId = $('.playlist>ul.active').attr(
+                    'data-playlist-id'
+                )
+                var addsong = new AV.Object('Song')
+                addsong.set('id', musicId) // 学生 Tom
+                var playlist = new AV.Object('Course')
+                playlist.set('playlistId', playlistId)
+                // 选课表对象
+                var playlistMap = new AV.Object('playlistMap')
+
+                // 设置关联
+                playlistMap.set('playlist', playlist)
+                playlistMap.set('song', musicId)
+
+                // 保存选课表对象
+                playlistMap.save()
                 window.eventHub.emit('addSong', musicId)
             })
             $('input#search').on('input', e => {
