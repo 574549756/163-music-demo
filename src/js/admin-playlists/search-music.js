@@ -86,6 +86,12 @@
                 console.log('保存完成')
 
                 setTimeout(() => {
+                    var courseList = new AV.Query('Course')
+                    courseList.contains('playlistId', playlistId)
+
+                    courseList.find().then(function(result) {
+                        return result
+                    })
                     var playlists = AV.Object.createWithoutData(
                         'Course',
                         playlistId
