@@ -23,6 +23,7 @@
                     .attr('data-playlist-id', playlist.id)
                 if (playlist.id === selectedPlaylistId) {
                     $li.addClass('active')
+                    /* window.eventHub.emit('renderPlaylist', selectedPlaylistId) */
                 }
                 return $li
             })

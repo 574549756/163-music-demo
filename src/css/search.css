@@ -98,6 +98,6 @@
 footer {
     display: flex;
 }
-#addSong2list {
+.addSong2list {
     cursor: pointer;
 }

@@ -64,30 +64,49 @@
                 $('#searchResult').empty()
                 $('#cross').removeClass('active')
             })
-            $('.addSong2list>p').on('click', e => {
-                console.log('是阻止冒泡问题')
-            })
-
-            $('.addSong2list').on('click', e => {
-                console.log('这里执行了')
+            $(document).on('click', '.addSong2list', e => {
                 let musicId = e.currentTarget.getAttribute('data-id')
-                let playlistId = $('.playlist>ul.active').attr(
-                    'data-playlist-id'
-                )
-                var addsong = new AV.Object('Song')
-                addsong.set('id', musicId) // 学生 Tom
-                var playlist = new AV.Object('Course')
+                let playlistId = $('ul.active').attr('data-playlist-id')
+
+                let addsong = new AV.Object('Song')
+                addsong.set('id', musicId)
+                let playlist = new AV.Object('Course')
                 playlist.set('playlistId', playlistId)
                 // 选课表对象
-                var playlistMap = new AV.Object('playlistMap')
-
+                console.log('创建中间表')
+                let playlistMap = new AV.Object('playlistMap')
+                console.log('创建中间表完成')
+                console.log('设置关联')
                 // 设置关联
                 playlistMap.set('playlist', playlist)
                 playlistMap.set('song', musicId)
-
+                console.log('设置关联完成')
                 // 保存选课表对象
                 playlistMap.save()
-                window.eventHub.emit('addSong', musicId)
+                console.log('保存完成')
+
+                setTimeout(() => {
+                    var playlists = AV.Object.createWithoutData(
+                        'Course',
+                        playlistId
+                    )
+
+                    var query = new AV.Query('playlistMap')
+
+                    query.equalTo('playlist', playlists)
+
+                    query.find().then(function(PlaylistMap) {
+                        console.log(PlaylistMap)
+                        playlistMap.forEach(function(scm, i, a) {
+                            console.log(scm)
+                            var songs = scm.get('song')
+                            console.log('查询完成')
+                            console.log(songs)
+                        })
+                    })
+                }, 1000)
+
+                /* window.eventHub.emit('addSong', playlistId) */
             })
             $('input#search').on('input', e => {
                 if (
