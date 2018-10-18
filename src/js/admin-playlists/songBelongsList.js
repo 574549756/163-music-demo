@@ -23,7 +23,7 @@
         data: {
             songs: []
         },
-        find(playlistId) {
+        findSongs(playlistId) {
             setTimeout(() => {
                 let playlistResult = new AV.Object.createWithoutData(
                     'Playlist',
@@ -34,10 +34,20 @@
                 songResult = query.find().then(playlistMap => {
                     playlistMap.forEach(scm => {
                         var songs = scm.get('songPointer')
-                        this.model.data.songs.push(songs.id)
+                        this.model.searchSongs(songs)
+                        /* this.model.data.songs.push(songs.id) */
                     })
                 })
             }, 500)
+        },
+        searchSongs(songs) {
+            var searchSong = new AV.Query('Song')
+            searchSong.get(songs.id).then(function(songResults) {
+                this.data.songs = songResults.map(songResult => {
+                    return { id: songResult.id, ...songResult.attributes }
+                })
+                return songResults
+            })
         }
     }
     let controller = {
