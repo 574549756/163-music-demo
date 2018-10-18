@@ -54,21 +54,16 @@
                         return templateArray
                     })
                 })
-                this.getSongs()
+                let array = this.data.templateArray
+                console.log(array)
+                this.data.songs = array.map(song => {
+                    return {
+                        id: song.id,
+                        ...song.attributes
+                    }
+                })
+                console.log(this.data.songs)
             })
-        },
-        getSongs() {
-            console.log('这里调用了')
-            console.dir(this.data.templateArray)
-            let array = this.data.templateArray
-
-            this.data.songs = array.map(song => {
-                return {
-                    id: song.id,
-                    ...song.attributes
-                }
-            })
-            console.log(this.data.songs)
         }
     }
     let controller = {
