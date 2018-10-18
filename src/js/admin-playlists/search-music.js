@@ -67,54 +67,19 @@
             $(document).on('click', '.addSong2list', e => {
                 let musicId = e.currentTarget.getAttribute('data-id')
                 let playlistId = $('ul.active').attr('data-playlist-id')
-
                 let addsong = new AV.Object.createWithoutData('Song', musicId)
-
                 let playlist = new AV.Object.createWithoutData(
                     'Playlist',
                     playlistId
                 )
-
-                // 选课表对象
-
+                // 中间表对象
                 let playlistMap = new AV.Object('playlistMap')
-
                 // 设置关联
                 playlistMap.set('playlistPointer', playlist)
                 playlistMap.set('songPointer', addsong)
-                console.log('设置关联完成')
-                // 保存选课表对象
+                // 保存中间表对象
                 playlistMap.save()
-                console.log('保存完成')
-
-                setTimeout(() => {
-                    let courseList = new AV.Query('Playlist')
-                    let playlistResult = new AV.Object.createWithoutData(
-                        'playlist',
-                        playlistId
-                    )
-
-                    console.log(listResult())
-                    var ListResult = listResult.results.map(function(item) {
-                        return item.id
-                    })
-                    console.log(ListResult)
-                    var query = new AV.Query('playlistMap')
-
-                    query.equalTo('playlist', playlists)
-
-                    query.find().then(function(PlaylistMap) {
-                        console.log(PlaylistMap)
-                        playlistMap.forEach(function(scm, i, a) {
-                            console.log(scm)
-                            var songs = scm.get('song')
-                            console.log('查询完成')
-                            console.log(songs)
-                        })
-                    })
-                }, 1000)
-
-                /* window.eventHub.emit('addSong', playlistId) */
+                window.eventHub.emit('addSong', playlistId)
             })
             $('input#search').on('input', e => {
                 if (
