@@ -46,6 +46,8 @@
         find() {
             var query = new AV.Query('Song')
             return query.find().then(songs => {
+                console.log('一个数组')
+                console.log(songs)
                 this.data.songs = songs.map(song => {
                     return { id: song.id, ...song.attributes }
                 })

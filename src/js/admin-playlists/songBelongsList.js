@@ -35,7 +35,8 @@
     }
     let model = {
         data: {
-            songs: []
+            songs: [],
+            templateArray: []
         },
         findSongs(playlistId) {
             let playlistResult = new AV.Object.createWithoutData(
@@ -47,22 +48,27 @@
             return query.find().then(playlistMap => {
                 playlistMap.forEach(scm => {
                     var songs = scm.get('songPointer')
-                    this.getSongs(songs)
+                    var searchSong = new AV.Query('Song')
+                    searchSong.get(songs.id).then(songResults => {
+                        this.data.templateArray.push(songResults)
+                        return templateArray
+                    })
                 })
+                this.getSongs()
             })
         },
-        getSongs(songs) {
-            var searchSong = new AV.Query('Song')
-            searchSong.get(songs.id).then(songResults => {
-                this.data.songs = songResults.map(songResult => {
-                    return {
-                        id: songResult.id,
-                        ...songResult.attributes
-                    }
-                })
-                console.log(songResults)
-                return songResults
+        getSongs() {
+            console.log('这里调用了')
+            console.dir(this.data.templateArray)
+            let array = this.data.templateArray
+
+            this.data.songs = array.map(song => {
+                return {
+                    id: song.id,
+                    ...song.attributes
+                }
             })
+            console.log(this.data.songs)
         }
     }
     let controller = {
