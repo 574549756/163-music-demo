@@ -68,38 +68,32 @@
                 let musicId = e.currentTarget.getAttribute('data-id')
                 let playlistId = $('ul.active').attr('data-playlist-id')
 
-                let addsong = new AV.Object('Song')
-                addsong.set('id', musicId)
-                let playlist = new AV.Object('Course')
-                playlist.set('playlistId', playlistId)
+                let addsong = new AV.Object.createWithoutData('Song', musicId)
+
+                let playlist = new AV.Object.createWithoutData(
+                    'Playlist',
+                    playlistId
+                )
+
                 // 选课表对象
-                console.log('创建中间表')
+
                 let playlistMap = new AV.Object('playlistMap')
-                console.log('创建中间表完成')
-                console.log('设置关联')
+
                 // 设置关联
-                playlistMap.set('playlist', playlist)
-                playlistMap.set('song', musicId)
+                playlistMap.set('playlistPointer', playlist)
+                playlistMap.set('songPointer', addsong)
                 console.log('设置关联完成')
                 // 保存选课表对象
                 playlistMap.save()
                 console.log('保存完成')
 
                 setTimeout(() => {
-                    var courseList = new AV.Query('Course')
-                    courseList.contains('playlistId', playlistId)
+                    let courseList = new AV.Query('Playlist')
+                    let playlistResult = new AV.Object.createWithoutData(
+                        'playlist',
+                        playlistId
+                    )
 
-                    function listResult() {
-                        return courseList.find().then(function(result) {
-                            result.map(playlist => {
-                                return {
-                                    id: playlist.id,
-                                    ...playlist.attributes
-                                }
-                            })
-                            return result
-                        })
-                    }
                     console.log(listResult())
                     var ListResult = listResult.results.map(function(item) {
                         return item.id
