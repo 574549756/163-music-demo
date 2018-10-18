@@ -1,6 +1,6 @@
 {
     let view = {
-        el: 'songBelongsList-displayArea',
+        el: '.songBelongsList-displayArea',
         init() {
             this.$el = $(this.el)
         },
@@ -12,10 +12,24 @@
         `,
         render(data) {
             let $el = $(this.el)
-            $el.html(this.template)
-            let { songs } = data
-            let liList = playLists.map(songs => {
-                let $li = $('<ul></ul>').html(``)
+            $el.html(this.templete)
+            let { songs, selectedSongId } = data
+            let liList = songs.map(song => {
+                let $li = $('<ul></ul>')
+                    .html(
+                        `<svg class="icon" aria-hidden="true"><use xlink: href="#icon-wangyiyunyinyuemusic1193417easyiconnet"></use></svg>
+                        <li>${
+                            song.name
+                        }</li><li><svg class="icon" aria-hidden="true">
+                            <use xlink:href="#icon-micc"></use>
+                        </svg>${song.artist}</li>`
+                    )
+                    .attr('data-song-id', song.id)
+                return $li
+            })
+            $el.find('.playList-music').empty()
+            liList.map(domLi => {
+                $el.find('.playList-music').append(domLi)
             })
         }
     }
@@ -24,49 +38,47 @@
             songs: []
         },
         findSongs(playlistId) {
-            setTimeout(() => {
-                let playlistResult = new AV.Object.createWithoutData(
-                    'Playlist',
-                    playlistId
-                )
-                var query = new AV.Query('playlistMap')
-                query.equalTo('playlistPointer', playlistResult)
-                songResult = query.find().then(playlistMap => {
-                    playlistMap.forEach(scm => {
-                        var songs = scm.get('songPointer')
-                        this.model.searchSongs(songs)
-                        /* this.model.data.songs.push(songs.id) */
+            let playlistResult = new AV.Object.createWithoutData(
+                'Playlist',
+                playlistId
+            )
+            var query = new AV.Query('playlistMap')
+            query.equalTo('playlistPointer', playlistResult)
+            return query.find().then(playlistMap => {
+                playlistMap.forEach(scm => {
+                    var songs = scm.get('songPointer')
+                    var searchSong = new AV.Query('Song')
+                    searchSong.get(songs.id).then(function(songResults) {
+                        this.data.songs = songResults.map(songResult => {
+                            return {
+                                id: songResult.id,
+                                ...songResult.attributes
+                            }
+                        })
+                        return songResults
                     })
+                    return songResults
                 })
-            }, 500)
-        },
-        searchSongs(songs) {
-            var searchSong = new AV.Query('Song')
-            searchSong.get(songs.id).then(function(songResults) {
-                this.data.songs = songResults.map(songResult => {
-                    return { id: songResult.id, ...songResult.attributes }
-                })
-                return songResults
             })
         }
     }
     let controller = {
         init(view, model) {
             this.view = view
-            this.view.init()
             this.model = model
+            this.view.render(this.model.data)
             this.bindEvent()
         },
         getAllPlaylistsInnerSong() {
-            return this.model.find().then(() => {
+            return this.model.findSongs().then(() => {
                 this.view.render(this.model.data)
             })
         },
         bindEvent() {
             window.eventHub.on('addSong', playlistId => {
-                this.model.find(playlistId)
+                this.model.findSongs(playlistId)
             })
-            window.eventHub.on('renderPlaylist', selectedPlaylistId => {
+            window.eventHub.on('select', selectedPlaylistId => {
                 this.getAllPlaylistsInnerSong(selectedPlaylistId)
             })
         }
