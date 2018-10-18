@@ -47,18 +47,21 @@
             return query.find().then(playlistMap => {
                 playlistMap.forEach(scm => {
                     var songs = scm.get('songPointer')
-                    var searchSong = new AV.Query('Song')
-                    searchSong.get(songs.id).then(function(songResults) {
-                        this.data.songs = songResults.map(songResult => {
-                            return {
-                                id: songResult.id,
-                                ...songResult.attributes
-                            }
-                        })
-                        return songResults
-                    })
-                    return songResults
+                    this.getSongs(songs)
                 })
+            })
+        },
+        getSongs(songs) {
+            var searchSong = new AV.Query('Song')
+            searchSong.get(songs.id).then(songResults => {
+                this.data.songs = songResults.map(songResult => {
+                    return {
+                        id: songResult.id,
+                        ...songResult.attributes
+                    }
+                })
+                console.log(songResults)
+                return songResults
             })
         }
     }
@@ -69,16 +72,16 @@
             this.view.render(this.model.data)
             this.bindEvent()
         },
-        getAllPlaylistsInnerSong() {
-            return this.model.findSongs().then(() => {
+        getAllPlaylistsInnerSong(playlistId) {
+            return this.model.findSongs(playlistId).then(() => {
                 this.view.render(this.model.data)
             })
         },
         bindEvent() {
             window.eventHub.on('addSong', playlistId => {
-                this.model.findSongs(playlistId)
+                this.getAllPlaylistsInnerSong(playlistId)
             })
-            window.eventHub.on('select', selectedPlaylistId => {
+            window.eventHub.on('selectPlaylist', selectedPlaylistId => {
                 this.getAllPlaylistsInnerSong(selectedPlaylistId)
             })
         }

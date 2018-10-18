@@ -84,7 +84,10 @@
                     }
                 }
                 let object = JSON.parse(JSON.stringify(data))
+                console.log(object)
                 window.eventHub.emit('select', object)
+
+                /* window.eventHub.emit('selectPlaylist', object.id) */
             })
         },
         bindEventHub() {
