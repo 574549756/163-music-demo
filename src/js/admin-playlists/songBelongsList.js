@@ -13,23 +13,26 @@
         render(data) {
             let $el = $(this.el)
             $el.html(this.template)
+            console.log(data.songs)
             let liList = data.songs.map(song => {
-                let $li = $('<ul></ul>')
-                    .html(
-                        `<svg class="icon" aria-hidden="true"><use xlink: href="#icon-wangyiyunyinyuemusic1193417easyiconnet"></use></svg>
+                let $li = $('<ul></ul>').html(
+                    `<svg class="icon" aria-hidden="true"><use xlink: href="#icon-wangyiyunyinyuemusic1193417easyiconnet"></use></svg>
                         <li>${
                             song.attributes.name
                         }</li><li><svg class="icon" aria-hidden="true">
                             <use xlink:href="#icon-micc"></use>
                         </svg>${song.attributes.artist}</li>
                         `
-                    )
-                    .attr('data-song-id', song.id)
+                )
                 return $li
+            })
+            console.log(liList)
+            let liListAfter = data.templateMap.map(temp => {
+                $(liList).attr('data-song-id', temp.id)
             })
 
             $el.find('.playList-music').empty()
-            liList.map(domLi => {
+            liListAfter.map(domLi => {
                 $el.find('.playList-music').append(domLi)
             })
         }
@@ -37,7 +40,11 @@
     let model = {
         data: {
             songs: [],
-            templateArray: []
+            templateMap: []
+        },
+        init() {
+            this.data.songs = []
+            this.data.templateMap = []
         },
         findSongs(playlistId) {
             let playlistResult = new AV.Object.createWithoutData(
@@ -48,6 +55,7 @@
             query.equalTo('playlistPointer', playlistResult)
             return query.find().then(playlistMap => {
                 playlistMap.forEach(scm => {
+                    this.data.templateMap.push(scm)
                     var songs = scm.get('songPointer')
                     var searchSong = new AV.Query('Song')
                     searchSong.get(songs.id).then(songResults => {
@@ -65,6 +73,7 @@
             this.bindEvent()
         },
         getAllPlaylistsInnerSong(playlistId) {
+            this.model.init()
             this.model.findSongs(playlistId)
             this.view.render(this.model.data)
         },
