@@ -12,8 +12,9 @@
         `,
         render(data) {
             let $el = $(this.el)
+            console.log(data)
             $el.html(this.template)
-            console.log(data.songs)
+
             let liList = data.songs.map(song => {
                 let $li = $('<ul></ul>').html(
                     `<svg class="icon" aria-hidden="true"><use xlink: href="#icon-wangyiyunyinyuemusic1193417easyiconnet"></use></svg>
@@ -81,8 +82,8 @@
             window.eventHub.on('addSong', playlistId => {
                 this.getAllPlaylistsInnerSong(playlistId)
             })
-            window.eventHub.on('select', selectedPlaylistId => {
-                this.getAllPlaylistsInnerSong(selectedPlaylistId.id)
+            window.eventHub.on('activePlaylist', selectedPlaylistId => {
+                this.getAllPlaylistsInnerSong(selectedPlaylistId)
             })
         }
     }
