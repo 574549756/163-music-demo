@@ -21,7 +21,8 @@
                             song.attributes.name
                         }</li><li><svg class="icon" aria-hidden="true">
                             <use xlink:href="#icon-micc"></use>
-                        </svg>${song.attributes.artist}</li>`
+                        </svg>${song.attributes.artist}</li>
+                        `
                     )
                     .attr('data-song-id', song.id)
                 return $li
