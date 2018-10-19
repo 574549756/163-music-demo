@@ -97,6 +97,7 @@
 }
 footer {
     display: flex;
+    justify-content: space-between;
 }
 .addSong2list {
     cursor: pointer;

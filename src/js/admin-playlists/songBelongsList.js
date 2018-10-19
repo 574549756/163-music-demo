@@ -5,28 +5,28 @@
             this.$el = $(this.el)
         },
         template: `
-        <ol class="playList-music">
+        <ul class="playList-music">
             <ul v-for="playlist in playlists">
             </ul>
-        </ol>
+        </ul>
         `,
         render(data) {
             let $el = $(this.el)
-            $el.html(this.templete)
-            let { songs, selectedSongId } = data
-            let liList = songs.map(song => {
+            $el.html(this.template)
+            let liList = data.songs.map(song => {
                 let $li = $('<ul></ul>')
                     .html(
                         `<svg class="icon" aria-hidden="true"><use xlink: href="#icon-wangyiyunyinyuemusic1193417easyiconnet"></use></svg>
                         <li>${
-                            song.name
+                            song.attributes.name
                         }</li><li><svg class="icon" aria-hidden="true">
                             <use xlink:href="#icon-micc"></use>
-                        </svg>${song.artist}</li>`
+                        </svg>${song.attributes.artist}</li>`
                     )
                     .attr('data-song-id', song.id)
                 return $li
             })
+
             $el.find('.playList-music').empty()
             liList.map(domLi => {
                 $el.find('.playList-music').append(domLi)
@@ -50,19 +50,10 @@
                     var songs = scm.get('songPointer')
                     var searchSong = new AV.Query('Song')
                     searchSong.get(songs.id).then(songResults => {
-                        this.data.templateArray.push(songResults)
-                        return templateArray
+                        this.data.songs.push(songResults)
+                        return songs
                     })
                 })
-                let array = this.data.templateArray
-                console.log(array)
-                this.data.songs = array.map(song => {
-                    return {
-                        id: song.id,
-                        ...song.attributes
-                    }
-                })
-                console.log(this.data.songs)
             })
         }
     }
@@ -70,20 +61,18 @@
         init(view, model) {
             this.view = view
             this.model = model
-            this.view.render(this.model.data)
             this.bindEvent()
         },
         getAllPlaylistsInnerSong(playlistId) {
-            return this.model.findSongs(playlistId).then(() => {
-                this.view.render(this.model.data)
-            })
+            this.model.findSongs(playlistId)
+            this.view.render(this.model.data)
         },
         bindEvent() {
             window.eventHub.on('addSong', playlistId => {
                 this.getAllPlaylistsInnerSong(playlistId)
             })
-            window.eventHub.on('selectPlaylist', selectedPlaylistId => {
-                this.getAllPlaylistsInnerSong(selectedPlaylistId)
+            window.eventHub.on('select', selectedPlaylistId => {
+                this.getAllPlaylistsInnerSong(selectedPlaylistId.id)
             })
         }
     }

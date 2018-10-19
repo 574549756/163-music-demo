@@ -148,3 +148,77 @@
 .musicInfoContainer > main > .playlistForm > .rightMain > .row > textarea {
     height: 49%;
 }
+#playList-music-container {
+    flex-grow: 1;
+    overflow: scroll;
+    width: 400px;
+}
+#playList-music-container::-webkit-scrollbar {
+    display: none;
+}
+.songBelongsList {
+    width: 100%;
+}
+.songBelongsList-displayArea {
+    height: 100%;
+    flex: 1;
+}
+.playList-music {
+    background: white;
+    flex: 1;
+    text-align: left;
+    height: 315px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: scroll;
+    margin: 0 20px;
+    border: 1px solid #ddd;
+}
+.playList-music::-webkit-scrollbar {
+    display: none;
+}
+.playList-music > ul {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 10px 10px 40px;
+    transition: all 0.5s;
+    position: relative;
+    cursor: pointer;
+}
+.playList-music > ul > li {
+    font: 14px/1.5 Helvetica, sans-serif;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.playList-music > ul > svg {
+    fill: #d43c33;
+    position: absolute;
+    left: 5px;
+    top: 19px;
+    height: 25px;
+    width: 25px;
+}
+.playList-music > ul > li:nth-child(2) {
+    color: black;
+    font-size: 16px;
+}
+.playList-music > ul > li:nth-child(3) {
+    color: #888;
+    font-size: 12px;
+}
+
+.playList-music > ul > li > svg {
+    fill: #d43c33;
+    height: 12px;
+    width: 12px;
+}
+.playList-music > ul.active {
+    border-left: 3px solid #d43c33;
+    background: #f8f8f8;
+    padding: 10px 10px 10px 47px;
+    margin: 0;
+}
+.playList-music > ul.active > svg {
+    position: absolute;
+    left: 12px;
+}
