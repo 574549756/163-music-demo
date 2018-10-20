@@ -61,6 +61,7 @@
                         var songs = scm.get('songPointer')
                         songResultsId.push(songs.id)
                     })
+                    console.log(songResults.Id)
                     return songResultsId
                 })
                 .then(songResultsId => {
