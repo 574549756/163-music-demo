@@ -60,6 +60,9 @@
                         this.data.templateMap.push(scm.id)
                         var songs = scm.get('songPointer')
                         songResultsId.push(songs.id)
+                        /* var searchSong = new AV.Query('Song')
+                        searchSong.get(songs.id) */
+                        
                     })
                     console.log(songResults.Id)
                     return songResultsId
