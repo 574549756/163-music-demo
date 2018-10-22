@@ -14,20 +14,18 @@
             let $el = $(this.el)
             $el.html(this.template)
             let liList = []
-            for(i=0;i<data.songs.length;i++){
+            for (i = 0; i < data.songs.length; i++) {
                 let $li = $('<ul></ul>').html(
                     `<svg class="icon" aria-hidden="true"><use xlink: href="#icon-wangyiyunyinyuemusic1193417easyiconnet"></use></svg>
                         <li>${
-                        data.songs[i].name
-                        }</li><li><svg class="icon" aria-hidden="true">
+                    data.songs[i].name
+                    }</li><li><svg class="icon" aria-hidden="true">
                             <use xlink:href="#icon-micc"></use>
                         </svg>${data.songs[i].artist}</li>
                     `
-                ).attr('data-songMap-id',data.templateMap[i])
+                ).attr('data-songMap-id', data.templateMap[i])
                 liList.push($li)
             }
-            console.log(data.templateMap)
-            console.log(liList)
             $el.find('.playList-music').empty()
             liList.map(domLi => {
                 $el.find('.playList-music').append(domLi)
@@ -42,7 +40,8 @@
         init() {
             this.data = {
                 songs: [],
-                templateMap: []
+                templateMap: [],
+                currentMusicList: undefined
             }
         },
         findSongs(playlistId) {
@@ -87,7 +86,8 @@
         init(view, model) {
             this.view = view
             this.model = model
-            this.bindEvent()
+            this.bindEventHub()
+            this.bindEvents()
         },
         getAllPlaylistsInnerSong(playlistId) {
             this.model.data.songs = []
@@ -96,11 +96,27 @@
                 this.view.render(this.model.data)
             })
         },
-        bindEvent() {
+        bindEvents() {
+            $(this.view.el).on('click', '.playList-music>ul', e => {
+                console.log('监听成功')
+                let templateMapId = e.currentTarget.getAttribute('data-songMap-id')
+                var todo = AV.Object.createWithoutData('playlistMap', templateMapId)
+                todo.destroy().then((success) => {
+                    this.getAllPlaylistsInnerSong(this.model.data.currentMusicList)
+                }, (faild) => {
+                    console.log('删除失败')
+                })
+            })
+
+
+        },
+        bindEventHub() {
             window.eventHub.on('addSong', playlistId => {
+                this.model.data.currentMusicList = playlistId
                 this.getAllPlaylistsInnerSong(playlistId)
             })
             window.eventHub.on('selectPlaylist', selectedPlaylistId => {
+                this.model.data.currentMusicList = selectedPlaylistId
                 this.getAllPlaylistsInnerSong(selectedPlaylistId)
             })
         }
