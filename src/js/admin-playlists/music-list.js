@@ -23,7 +23,7 @@
                     .attr('data-playlist-id', playlist.id)
                 if (playlist.id === selectedPlaylistId) {
                     $li.addClass('active')
-                    window.eventHub.emit('select', selectedPlaylistId)
+                    window.eventHub.emit('selectPlaylist', selectedPlaylistId)
                 }
                 return $li
             })
@@ -86,6 +86,7 @@
                     }
                 }
                 let object = JSON.parse(JSON.stringify(data))
+                window.eventHub.emit('select',object)
             })
         },
         bindEventHub() {

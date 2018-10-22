@@ -13,21 +13,21 @@
         render(data) {
             let $el = $(this.el)
             $el.html(this.template)
-
-            let liList = data.songs.map(song => {
-                let $li = $('<ul></ul>')
-                    .html(
-                        `<svg class="icon" aria-hidden="true"><use xlink: href="#icon-wangyiyunyinyuemusic1193417easyiconnet"></use></svg>
+            let liList = []
+            for(i=0;i<data.songs.length;i++){
+                let $li = $('<ul></ul>').html(
+                    `<svg class="icon" aria-hidden="true"><use xlink: href="#icon-wangyiyunyinyuemusic1193417easyiconnet"></use></svg>
                         <li>${
-                            song.attributes.name
+                        data.songs[i].name
                         }</li><li><svg class="icon" aria-hidden="true">
                             <use xlink:href="#icon-micc"></use>
-                        </svg>${song.attributes.artist}</li>
-                        `
-                    )
-                    .attr('data-song-id', song.id)
-                return $li
-            })
+                        </svg>${data.songs[i].artist}</li>
+                    `
+                ).attr('data-songMap-id',data.templateMap[i])
+                liList.push($li)
+            }
+            console.log(data.templateMap)
+            console.log(liList)
             $el.find('.playList-music').empty()
             liList.map(domLi => {
                 $el.find('.playList-music').append(domLi)
@@ -60,39 +60,27 @@
                         this.data.templateMap.push(scm.id)
                         var songs = scm.get('songPointer')
                         songResultsId.push(songs.id)
-                        /* var searchSong = new AV.Query('Song')
-                        searchSong.get(songs.id) */
-                        
                     })
-                    console.log(songResults.Id)
                     return songResultsId
                 })
-                .then(songResultsId => {
+                .then(async songResultsId => {
                     let songAfter = []
                     var searchSong = new AV.Query('Song')
-                    songResultsId.map(songs => {
-                        searchSong
-                            .get(songs)
-                            .then(songResult => {
-                                return songResult
-                            })
-                            .then(songResult => {
-                                songAfter.push(songResult)
-                            })
-                    })
+                    for (i = 0; i < songResultsId.length; i++) {
+                        await searchSong.get(songResultsId[i]).then(songResult => {
+                            songAfter.push(songResult)
+                        })
+                    }
                     return songAfter
                 })
-            /* .then(songAfter => {
-                    setTimeout(() => {
-                        this.data.songs = songAfter.map(song => {
-                            return {
-                                id: song.id,
-                                ...song.attributes
-                            }
-                        })
-                        console.log(this.data)
-                    }, 0)
-                }) */
+                .then(songAfter => {
+                    this.data.songs = songAfter.map(song => {
+                        return {
+                            id: song.id,
+                            ...song.attributes
+                        }
+                    })
+                })
         }
     }
     let controller = {
@@ -102,13 +90,17 @@
             this.bindEvent()
         },
         getAllPlaylistsInnerSong(playlistId) {
-            this.model.findSongs(playlistId)
+            this.model.data.songs = []
+            this.model.data.templateMap = []
+            this.model.findSongs(playlistId).then(() => {
+                this.view.render(this.model.data)
+            })
         },
         bindEvent() {
             window.eventHub.on('addSong', playlistId => {
                 this.getAllPlaylistsInnerSong(playlistId)
             })
-            window.eventHub.on('select', selectedPlaylistId => {
+            window.eventHub.on('selectPlaylist', selectedPlaylistId => {
                 this.getAllPlaylistsInnerSong(selectedPlaylistId)
             })
         }
