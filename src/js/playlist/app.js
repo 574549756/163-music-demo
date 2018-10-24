@@ -7,7 +7,7 @@
             templateMap:[]
         },
         get(playlistId) {
-            this.model.data.playlist = playlistId
+            this.data.playlist = playlistId
             let playlistResult = new AV.Object.createWithoutData(
                 'Playlist',
                 playlistId
@@ -93,5 +93,5 @@
             document.body.appendChild(script2)
         }
     }
-    controller.inid(view, model)
+    controller.init(view, model)
 }
