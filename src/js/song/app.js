@@ -6,6 +6,7 @@
         },
         render(data) {
             let { song, status } = data
+            $('title').text(`${song.name} - ${song.artist}`)
             this.$el
                 .find('.backgroundCover')
                 .css('background-image', `url(${song.cover})`)

@@ -3,9 +3,7 @@
         el: 'section.playlists',
         template: `
         <li data-songList-id="{{songList.id}}">
-            <div class="cover">
-                <img src="{{songList.cover}}" alt="封面">
-            </div>
+            <div class="cover" style="background-image:url({{songList.cover}})" alt="封面"></div>
             <p>{{songList.name}}</p>
         </li>
         `,
