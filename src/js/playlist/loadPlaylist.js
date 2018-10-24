@@ -1,6 +1,9 @@
 {
     let view = {
-        el: ''
+        el: '',
+        render(Playlist){
+            $('title').text(`${Playlist.name}`)
+        }
     }
     let model = {
         data: {
@@ -8,7 +11,7 @@
         },
         getPlaylist(playlists) {
             var query = new AV.Query('Playlist');
-            query.get(playlists).then(function (playlist) {
+            return query.get(playlists).then( (playlist)=> {
                 Object.assign(this.data.playlist, {
                     id: playlist.id,
                     ...playlist.attributes
@@ -24,10 +27,14 @@
             
             this.bindEventHub()
         },
+        changeTitle(){
+            
+        },
         bindEventHub() {
             window.eventHub.on('getPlaylist', playlist => {
                 this.model.getPlaylist(playlist).then(()=>{
-                    this.model.render(this.model.data)
+                    this.view.render(this.model.data.playlist)
+                    
                 })
             })
         }

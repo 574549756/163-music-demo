@@ -49,14 +49,15 @@
         init(view, model) {
             this.view = view
             this.model = model
+            this.loadPlaylist()
+            
+            this.loadMusic()
             let id = this.getPlaylistId()
             this.model.get(id).then(() => {
                 window.eventHub.emit('getPlaylist', this.model.data.playlist)
                 window.eventHub.emit('getSongs', this.model.data.songs)
             })
             this.bindEventHub()
-            this.loadPlaylist()
-            this.loadMusic()
         },
         bindEventHub() {
         },
