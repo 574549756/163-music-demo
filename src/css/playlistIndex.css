@@ -43,6 +43,24 @@ body {
     font-size: 15px;
     background: #f8f8f8;
 }
+header>.playlistArea{
+}
+header>.playlistArea>.coverContainer{
+    position: relative;
+    height: 48vw;
+    width:100vw;
+    border:1px solid red;
+}
+header>.playlistArea>.coverContainer>.coverImg{
+    position: absolute;
+    top:8vw;
+    left:4vw;
+    height: 34vw;
+    width: 34vw;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 main>h3{
     font-size:12px;
     height:23px;

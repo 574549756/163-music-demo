@@ -2,7 +2,7 @@
     let view = {
         el: 'header',
         template: `
-        <section class="cover">
+        <section class="coverContainer">
             <div class="coverImg"></div>
             <div class="playlist-title">{{playlist.name}}</div>
         </section>
@@ -21,9 +21,8 @@
                     .replace('{{playlist.name}}', playlists.name)
                     .replace('{{playlist.summary}}', playlists.summary)
             )
-            console.log($li)
-            $li.find('.cover').css('background', `url(${playlists.url})`)
-            $li.find('.coverImg').css('background', `url(${playlists.url})`)
+            $li.find('.coverContainer').css('background-image', `url(${playlists.url})`)
+            $li.find('.coverImg').css('background-image', `url(${playlists.url})`)
             this.$el.find('.playlistArea').append($li)
         }
     }
