@@ -2,6 +2,7 @@
     let view = {
         el: 'header',
         template: `
+        <div class="playlistArea">
         <section class="coverContainer">
             <div class="coverImg"></div>
             <div class="playlist-title">{{playlist.name}}</div>
@@ -10,6 +11,7 @@
             <div class="summaryContent">简介：{{playlist.summary}}</div>
             <div class="buttonMore"></div>
         </section>
+        </div>
         `,
         init() {
             this.$el = $(this.el)
@@ -23,7 +25,7 @@
             )
             $li.find('.coverContainer').css('background-image', `url(${playlists.url})`)
             $li.find('.coverImg').css('background-image', `url(${playlists.url})`)
-            this.$el.find('.playlistArea').append($li)
+            this.$el.append($li)
         }
     }
     let model = {
