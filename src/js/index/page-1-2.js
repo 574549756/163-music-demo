@@ -37,6 +37,7 @@
         data: { songs: [] },
         find() {
             var query = new AV.Query('Song')
+            query.limit(10)
             return query.find().then(songs => {
                 this.data.songs = songs.map(song => {
                     return { id: song.id, ...song.attributes }

@@ -14,7 +14,7 @@
             let liList = playlists.map(playlist => {
                 let $li = $('<ul></ul>')
                     .html(
-                        `<div style="background:url(${
+                        `<div style="background-image:url(${
                             playlist.url
                         });height:30px;width:30px;"></div><li>${
                             playlist.name
@@ -27,9 +27,9 @@
                 }
                 return $li
             })
-            $el.find('ul').empty()
+            $el.find('ul.playList').empty()
             liList.map(domLi => {
-                $el.find('ul').append(domLi)
+                $el.find('ul.playList').append(domLi)
             })
         },
         clearActive() {
