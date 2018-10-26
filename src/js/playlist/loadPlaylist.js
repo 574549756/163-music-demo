@@ -4,6 +4,7 @@
         template: `
         <div class="playlistArea">
         <section class="coverContainer">
+            <div class="backgroundCover"></div>
             <div class="coverImg"></div>
             <div class="playlist-title">{{playlist.name}}</div>
         </section>
@@ -23,7 +24,7 @@
                     .replace('{{playlist.name}}', playlists.name)
                     .replace('{{playlist.summary}}', playlists.summary)
             )
-            $li.find('.coverContainer').css('background-image', `url(${playlists.url})`)
+            $li.find('.backgroundCover').css('background-image', `url(${playlists.url})`)
             $li.find('.coverImg').css('background-image', `url(${playlists.url})`)
             this.$el.append($li)
         }

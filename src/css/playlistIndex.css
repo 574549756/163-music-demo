@@ -47,19 +47,49 @@ header>.playlistArea{
 }
 header>.playlistArea>.coverContainer{
     position: relative;
+    display: flex;
     height: 48vw;
     width:100vw;
-    border:1px solid red;
+    padding: 30px 10px 30px 15px;
+    overflow: hidden;
 }
-header>.playlistArea>.coverContainer>.coverImg{
+header>.playlistArea>.coverContainer::after{
+    content:'';
     position: absolute;
-    top:8vw;
-    left:4vw;
-    height: 34vw;
-    width: 34vw;
+    top:0;
+    left:0;
+    right:0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index:-9;
+}
+header>.playlistArea>.coverContainer>.backgroundCover{
+    position:absolute;
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
+    filter: blur(20px);
+    transform:scale(1.25);
+    z-index: -10;
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+}
+header>.playlistArea>.coverContainer>.coverImg{
+    height: 34vw;
+    width: 34vw;
+    margin-right: 20px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+header>.playlistArea>.coverContainer>.playlist-title{
+    color:white;
+}
+header>.playlistArea>.summary>.summaryContent{
+    color:#666;
+    padding: 20px 10px 20px 15px;
 }
 main>h3{
     font-size:12px;
