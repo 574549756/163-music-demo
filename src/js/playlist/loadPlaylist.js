@@ -68,8 +68,8 @@
             this.bindEventHub()
             this.bindEvent()
         },
-        changeTitle() {
-
+        changeTitle(data) {
+            $('title').text(`${data.playlists.name} - 歌单 - 云音乐`)
         },
         bindEvent(){
             $(this.view.el).on('click','.summary',e=>{
@@ -85,7 +85,8 @@
             window.eventHub.on('getPlaylist', playlist => {
                 this.model.getPlaylist(playlist).then(() => {
                     this.view.render(this.model.data)
-
+                }).then(()=>{
+                    this.changeTitle(this.model.data)
                 })
             })
         }
